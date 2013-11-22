@@ -1,0 +1,1 @@
+<?php	$TestUser = new User();	$TestUser->connect(1);	preType($TestUser);		include_once("/views/userpage.php");?>   

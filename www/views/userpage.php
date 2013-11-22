@@ -1,13 +1,9 @@
-<?php
-	$user_info = $db->query("SELECT * FROM info")
-					->fetch_assoc();
-?>   
     <div class="container">
 
       <div class="row">
-          <h1><?=$user_info["name"]." ".$user_info["lastname"]?></h1>
+          <h1><?=$user_info["first_name"]." ".$user_info["last_name"]?></h1>
       </div>
-<div class="hero-unit">
+<!--<div class="hero-unit">
                 <div class="container">
                     <div class="row-fluid">
                         <div class="span6 hero-text">
@@ -20,5 +16,5 @@
                         <div class="span6 hero-image"></div>
                     </div>
                 </div>
-            </div>
+            </div>-->
     </div>
