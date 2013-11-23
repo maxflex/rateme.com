@@ -1,10 +1,10 @@
 <?php
 	class User
 	{
-		public $id;				// id â áä settings
-		public $first_name;		// èìÿ
-		public $last_name;		// ôàìèëèÿ
-		public $password;		// ïàðîëü
+		public $id;				// id Ð² Ð±Ð´ settings
+		public $first_name;		// Ð¸Ð¼Ñ
+		public $last_name;		// Ñ„Ð°Ð¼Ð¸Ð»Ð¸Ñ
+		public $password;		// Ð¿Ð°Ñ€Ð¾Ð»ÑŒ
 		
 		public function connect($id)
 		{
