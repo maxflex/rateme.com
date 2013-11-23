@@ -1,5 +1,5 @@
 <?php
-	/* Файл конфигурации */
+/* Файл конфигурации */
 	const DB_LOGIN 		= "root";
 	const DB_PASSWORD 	= "";
 	const DB_HOST 		= "localhost";

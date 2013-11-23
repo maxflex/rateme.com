@@ -15,10 +15,6 @@
 			{
 				$this->{$key} = $value;
 			}
-			$this->first_name 	= $user_info["first_name"];
-			$this->last_name 	= $user_info["last_name"];
-			$this->password 	= $user_info["password"];
-			//$db_user = new mysqli(DB_HOST, DB_LOGIN, DB_PASSWORD, "user_1");
 		}
 	}
 ?>
