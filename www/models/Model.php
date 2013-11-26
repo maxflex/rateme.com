@@ -1,5 +1,4 @@
 <?php
-
 	// Скелет модели
 	class Model
 	{
@@ -15,12 +14,11 @@
 		// Переменные
 		public $isNewRecord = true;			// Новая запись
 		
-		
 		// Конструктор
 		public function __construct($array = false)
 		{
 			// Запрос к текущей БД на показ столбцов
-			$Query = dbSettings()->query("SHOW COLUMNS FROM {self::$mysql_table}");
+			$Query = dbSettings()->query("SHOW COLUMNS FROM {self::mysql_table}");
 			
 			// Динамически создаем переменные на основе таблицы	
 			while ($data = $Query->fetch_assoc())
@@ -54,14 +52,16 @@
 		{
 			// Получаем все данные из таблицы + доп условие, если есть
 			$result = dbSettings()->query("
-				SELECT * FROM {self::$mysql_table} 
+				SELECT * FROM users 
 				WHERE true ".(!empty($params["condition"]) ? " AND ".$params["condition"] : "") // Если есть дополнительное условие выборки
 				.(!empty($params["order"]) ? " ORDER BY ".$params["order"] : "")				// Если есть условие сортировки
 				);
+			echo $result->num_rows;
 	
 			// Если успешно получили и (что-то есть или нужно просто подсчитать)
 			if ($result && ($result->num_rows || $count))
 			{
+				echo "2";
 				// Если нужно только подсчитать
 				if ($count)
 				{
@@ -69,7 +69,7 @@
 				}
 				
 				// Получаем имя текущего класса
-				$class_name = get_class($this);
+				$class_name = get_class();
 				
 				// Создаем массив объектов
 				while ($array = $result->fetch_assoc())
@@ -94,7 +94,7 @@
 		{
 			// Получаем все данные из таблицы + доп условие, если есть
 			$result = dbSettings()->query("
-				SELECT * FROM {self::$mysql_table} 
+				SELECT * FROM {self::mysql_table} 
 				WHERE true ".(!empty($params["condition"]) ? " AND ".$params["condition"] : "") // Если есть дополнительное условие выборки
 				.(!empty($params["order"]) ? " ORDER BY ".$params["order"] : "")				// Если есть условие сортировки
 				." LIMIT 1");
@@ -106,7 +106,7 @@
 				$array = $result->fetch_assoc();
 				
 				// Получаем название класса
-				$class_name = get_class($this);
+				$class_name = get_class();
 				
 				// Возвращаем объект
 				return new $class_name($array);
@@ -123,7 +123,7 @@
 		public static function findById($id)
 		{
 			// Получаем все данные из таблицы
-			$result = dbSettings()->query("SELECT * FROM {self::$mysql_table} WHERE id=".$id);
+			$result = dbSettings()->query("SELECT * FROM {self::mysql_table} WHERE id=".$id);
 			
 			// Если успешно получили
 			if ($result)
@@ -132,7 +132,7 @@
 				$array = $result->fetch_assoc();
 				
 				// Получаем название класса
-				$class_name = get_class($this);
+				$class_name = get_class();
 				
 				// Возвращаем объект
 				return new $class_name($array);	
@@ -148,7 +148,7 @@
 		/*
 		 * Сохранение
 		 */
-		 public function save()
+		 public static function save()
 		 {
 		 	// Проверяем есть ли в бд шидзе с таким ID
 			if ($this->isNewRecord)
@@ -167,7 +167,7 @@
 			 		}
 			 	}
 	
-				$result = dbSettings()->query("INSERT INTO {self::$mysql_table} (".implode(",", $into).") VALUES (".implode(",", $values).")");
+				$result = dbSettings()->query("INSERT INTO {self::mysql_table} (".implode(",", $into).") VALUES (".implode(",", $values).")");
 	
 				$this->id = $result->insert_id; // Получаем ID
 				$this->isNewRecord = false;		// Уже не новая запись
@@ -183,7 +183,7 @@
 				 	$query[] = $field." = '".$this->{$field}."'";
 			 	}
 				
-				return dbSettings()->query("UPDATE {self::$mysql_table} SET ".implode(",", $query)." WHERE id=".$this->id);
+				return dbSettings()->query("UPDATE {self::mysql_table} SET ".implode(",", $query)." WHERE id=".$this->id);
 			}	
 		 }
 		
