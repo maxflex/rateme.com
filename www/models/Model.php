@@ -20,7 +20,7 @@
 		public function __construct($array = false)
 		{
 			// Запрос к текущей БД на показ столбцов
-			$Query = dbSettings()->query("SHOW COLUMNS FROM {$this->mysql_table}");
+			$Query = dbSettings()->query("SHOW COLUMNS FROM {self::$mysql_table}");
 			
 			// Динамически создаем переменные на основе таблицы	
 			while ($data = $Query->fetch_assoc())
@@ -54,7 +54,7 @@
 		{
 			// Получаем все данные из таблицы + доп условие, если есть
 			$result = dbSettings()->query("
-				SELECT * FROM {$this->mysql_table} 
+				SELECT * FROM {self::$mysql_table} 
 				WHERE true ".(!empty($params["condition"]) ? " AND ".$params["condition"] : "") // Если есть дополнительное условие выборки
 				.(!empty($params["order"]) ? " ORDER BY ".$params["order"] : "")				// Если есть условие сортировки
 				);
@@ -94,7 +94,7 @@
 		{
 			// Получаем все данные из таблицы + доп условие, если есть
 			$result = dbSettings()->query("
-				SELECT * FROM {$this->mysql_table} 
+				SELECT * FROM {self::$mysql_table} 
 				WHERE true ".(!empty($params["condition"]) ? " AND ".$params["condition"] : "") // Если есть дополнительное условие выборки
 				.(!empty($params["order"]) ? " ORDER BY ".$params["order"] : "")				// Если есть условие сортировки
 				." LIMIT 1");
@@ -123,7 +123,7 @@
 		public static function findById($id)
 		{
 			// Получаем все данные из таблицы
-			$result = dbSettings()->query("SELECT * FROM {$this->mysql_table} WHERE id=".$id);
+			$result = dbSettings()->query("SELECT * FROM {self::$mysql_table} WHERE id=".$id);
 			
 			// Если успешно получили
 			if ($result)
@@ -167,7 +167,7 @@
 			 		}
 			 	}
 	
-				$result = dbSettings()->query("INSERT INTO {$this->mysql_table} (".implode(",", $into).") VALUES (".implode(",", $values).")");
+				$result = dbSettings()->query("INSERT INTO {self::$mysql_table} (".implode(",", $into).") VALUES (".implode(",", $values).")");
 	
 				$this->id = $result->insert_id; // Получаем ID
 				$this->isNewRecord = false;		// Уже не новая запись
@@ -183,7 +183,7 @@
 				 	$query[] = $field." = '".$this->{$field}."'";
 			 	}
 				
-				return dbSettings()->query("UPDATE {$this->mysql_table} SET ".implode(",", $query)." WHERE id=".$this->id);
+				return dbSettings()->query("UPDATE {self::$mysql_table} SET ".implode(",", $query)." WHERE id=".$this->id);
 			}	
 		 }
 		
