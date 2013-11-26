@@ -1,0 +1,1 @@
+<?php	// Контроллер пользователей	class UserController extends Controller	{			// Тестовая функция		public function actionTest()		{			$TestUser = new User();			//$TestUser->connect(1);			preType($TestUser);						$this->render("user");		}	}	?>   

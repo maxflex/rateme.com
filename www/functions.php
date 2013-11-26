@@ -2,8 +2,8 @@
 	// Глобальные функции сайта
 	
 	/*
-		Пре-тайп
-	*/
+	 * Пре-тайп
+	 */
 	function preType($anything, $exit = false)
 	{
 		echo "<pre>";
@@ -14,6 +14,15 @@
 		{
 			exit();
 		}
+	}
+	
+	/*
+	 * Возвращает соединение DB_SETTINGS
+	 */
+	function dbSettings()
+	{
+		global $db_settings;
+		return $db_settings;
 	}
 
 ?>

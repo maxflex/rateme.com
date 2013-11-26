@@ -1,0 +1,15 @@
+# RewriteEngine on
+
+# Change the URI here to whatever you want your homepage to be
+# RewriteRule ^$ index.php?controller=user [L,QSA]
+
+# Changes /index.php?module=welcome to /welcome
+# RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-d
+# RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-f
+# RewriteRule ^([^/]*)$ index.php?controller=$1 [L,QSA]
+
+# RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-d
+# RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule ^([^/]*)/([^/]*)$ index.php?controller=$1&action=$2 [L,QSA]

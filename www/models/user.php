@@ -1,10 +1,13 @@
 <?php
-	class User
+	class User extends Model
 	{
+		public $mysql_table	= "users";
+		/*
 		public $id;				// id в бд settings
 		public $first_name;		// имя
 		public $last_name;		// фамилия
 		public $password;		// пароль
+		*/
 		
 		public function connect($id)
 		{

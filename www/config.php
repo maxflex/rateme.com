@@ -1,11 +1,34 @@
 <?php
-/* Файл конфигурации */
-	const DB_LOGIN 		= "root";
-	const DB_PASSWORD 	= "";
-	const DB_HOST 		= "localhost";
-	define("BASE_ROOT", $_SERVER["DOCUMENT_ROOT"]);
+	/* Файл конфигурации */
+
 	
-	// Открываем соединение с БД
+	// Константы
+	$_constants = array(
+		"DB_LOGIN"		=> "root",
+		"DB_PASSWORD"	=> "root",
+		"DB_HOST"		=> "localhost",
+		"BASE_ROOT"		=> $_SERVER["DOCUMENT_ROOT"]."/rateme.com/www/",
+	);
+
+	// Контроллеры и модели 
+	$_controllers_and_models = array(
+		"User",
+	);
+	
+	
+	/********************************************************************/
+	
+	
+	// Объявляем константы
+	foreach ($_constants as $key => $val)
+	{
+		define($key, $val);
+	}
+		
+	// Конфигурация ошибок (error_reporing(0) - отключить вывод ошибок)
+	error_reporting(E_ERROR | E_WARNING | E_PARSE);
+	
+	// Открываем соединение с основной БД
 	$db_settings = new mysqli(DB_HOST, DB_LOGIN, DB_PASSWORD, "settings");
 	
 	// Установлено ли соединение
@@ -17,9 +40,14 @@
 	// Устанавливаем кодировку
 	$db_settings->set_charset("utf8");
 	
-	// Подключаем основные функции
-	include_once("functions.php");
+	include_once("functions.php");				// Подключаем основные функции
+	require_once("controllers/Controller.php");	// Основной контроллер
+	require_once("models/Model.php");			// Основная модель
 	
-	// Подключаем модели
-	include_once("models/user.php");
+	// Подключаем контроллеры и модели
+	foreach($_controllers_and_models as $val)
+	{
+		require_once("controllers/{$val}Controller.php");	// Подключаем контроллер
+		require_once("models/{$val}.php");					// Подключаем модель к контроллеру
+	}
 ?>
