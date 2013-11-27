@@ -1,4 +1,5 @@
 <?php
+
 	// Скелет модели
 	class Model
 	{
@@ -18,7 +19,7 @@
 		public function __construct($array = false)
 		{
 			// Запрос к текущей БД на показ столбцов
-			$Query = dbSettings()->query("SHOW COLUMNS FROM {self::mysql_table}");
+			$Query = dbSettings()->query("SHOW COLUMNS FROM ".static::$mysql_table);
 			
 			// Динамически создаем переменные на основе таблицы	
 			while ($data = $Query->fetch_assoc())
@@ -52,16 +53,14 @@
 		{
 			// Получаем все данные из таблицы + доп условие, если есть
 			$result = dbSettings()->query("
-				SELECT * FROM users 
+				SELECT * FROM ".static::$mysql_table." 
 				WHERE true ".(!empty($params["condition"]) ? " AND ".$params["condition"] : "") // Если есть дополнительное условие выборки
 				.(!empty($params["order"]) ? " ORDER BY ".$params["order"] : "")				// Если есть условие сортировки
 				);
-			echo $result->num_rows;
 	
 			// Если успешно получили и (что-то есть или нужно просто подсчитать)
 			if ($result && ($result->num_rows || $count))
 			{
-				echo "2";
 				// Если нужно только подсчитать
 				if ($count)
 				{
@@ -69,7 +68,7 @@
 				}
 				
 				// Получаем имя текущего класса
-				$class_name = get_class();
+				$class_name = get_called_class();
 				
 				// Создаем массив объектов
 				while ($array = $result->fetch_assoc())
@@ -94,7 +93,7 @@
 		{
 			// Получаем все данные из таблицы + доп условие, если есть
 			$result = dbSettings()->query("
-				SELECT * FROM {self::mysql_table} 
+				SELECT * FROM ".static::$mysql_table."
 				WHERE true ".(!empty($params["condition"]) ? " AND ".$params["condition"] : "") // Если есть дополнительное условие выборки
 				.(!empty($params["order"]) ? " ORDER BY ".$params["order"] : "")				// Если есть условие сортировки
 				." LIMIT 1");
@@ -106,7 +105,7 @@
 				$array = $result->fetch_assoc();
 				
 				// Получаем название класса
-				$class_name = get_class();
+				$class_name = get_called_class();
 				
 				// Возвращаем объект
 				return new $class_name($array);
@@ -123,8 +122,8 @@
 		public static function findById($id)
 		{
 			// Получаем все данные из таблицы
-			$result = dbSettings()->query("SELECT * FROM {self::mysql_table} WHERE id=".$id);
-			
+			$result = dbSettings()->query("SELECT * FROM ".static::$mysql_table." WHERE id=".$id);
+					
 			// Если успешно получили
 			if ($result)
 			{
@@ -132,7 +131,7 @@
 				$array = $result->fetch_assoc();
 				
 				// Получаем название класса
-				$class_name = get_class();
+				$class_name = get_called_class();
 				
 				// Возвращаем объект
 				return new $class_name($array);	
@@ -148,8 +147,11 @@
 		/*
 		 * Сохранение
 		 */
-		 public static function save()
+		 public function save()
 		 {
+		 	// Перед сохранением
+		 	$this->beforeSave();
+		 	
 		 	// Проверяем есть ли в бд шидзе с таким ID
 			if ($this->isNewRecord)
 			{
@@ -167,10 +169,16 @@
 			 		}
 			 	}
 	
-				$result = dbSettings()->query("INSERT INTO {self::mysql_table} (".implode(",", $into).") VALUES (".implode(",", $values).")");
-	
-				$this->id = $result->insert_id; // Получаем ID
-				$this->isNewRecord = false;		// Уже не новая запись
+				$result = dbSettings()->query("INSERT INTO ".static::$mysql_table." (".implode(",", $into).") VALUES (".implode(",", $values).")");
+				
+				if ($result) {
+					$this->id = $result->insert_id; // Получаем ID
+					$this->isNewRecord = false;		// Уже не новая запись
+					$this->afterSave();				// После сохранения
+					return true;
+				} else {
+					return false;
+				}
 			}	
 			else
 			{
@@ -182,9 +190,33 @@
 			 			
 				 	$query[] = $field." = '".$this->{$field}."'";
 			 	}
+			 					
+				$result = dbSettings()->query("UPDATE ".static::$mysql_table." SET ".implode(",", $query)." WHERE id=".$this->id);
 				
-				return dbSettings()->query("UPDATE {self::mysql_table} SET ".implode(",", $query)." WHERE id=".$this->id);
+				if ($result) {
+					$this->afterSave();	// После сохранения
+					return true;
+				} else {
+					return false;
+				}
 			}	
+		 }
+		 
+		 
+		 /*
+		  * Перед сохранением
+		  */
+		 public function beforeSave()
+		 {
+			 // Будет переопределяться в child-классах
+		 }
+		 
+		 /*
+		  * После сохранения
+		  */
+		 public function afterSave()
+		 {
+			 // Будет переопределяться в child-классах
 		 }
 		
 	}

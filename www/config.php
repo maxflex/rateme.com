@@ -5,9 +5,9 @@
 	// Константы
 	$_constants = array(
 		"DB_LOGIN"		=> "root",
-		"DB_PASSWORD"	=> "",
+		"DB_PASSWORD"	=> "root",
 		"DB_HOST"		=> "localhost",
-		"BASE_ROOT"		=> $_SERVER["DOCUMENT_ROOT"],
+		"BASE_ROOT"		=> $_SERVER["DOCUMENT_ROOT"]."/rateme.com/www/",
 	);
 
 	// Контроллеры и модели 
@@ -26,7 +26,7 @@
 	}
 		
 	// Конфигурация ошибок (error_reporing(0) - отключить вывод ошибок)
-	// error_reporting(E_ERROR | E_WARNING | E_PARSE);
+	error_reporting(E_ERROR | E_WARNING | E_PARSE);
 	
 	// Открываем соединение с основной БД
 	$db_settings = new mysqli(DB_HOST, DB_LOGIN, DB_PASSWORD, "settings");

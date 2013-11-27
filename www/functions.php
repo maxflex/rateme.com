@@ -24,5 +24,21 @@
 		global $db_settings;
 		return $db_settings;
 	}
-
+	
+	
+	/*
+	 * Добавляет JavaScript
+	 */
+	function addJs($js)
+	{
+		echo "<script src='js/{$js}.js'></script>";
+	}
+	
+	/*
+	 * Добавляет CSS
+	 */
+	function addCss($css)
+	{
+		echo "<link href='css/{$css}.css' rel='stylesheet'>";
+	}
 ?>
