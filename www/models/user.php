@@ -1,5 +1,5 @@
 <?php
 	class User extends Model
 	{
-		public static $mysql_table	= "users";
+		protected static $mysql_table = "users";
 	}

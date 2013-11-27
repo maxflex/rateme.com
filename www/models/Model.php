@@ -1,19 +1,60 @@
 <?php
-
+	interface ModelFunctions
+	{
+		/*
+		 * Получаем все записи
+		 * $params - дополнительные параметры (condition - дополнительное условие, order - параметры сортировки)
+		 * $count - только подсчитываем кол-во найденных
+		 */
+		public static function findAll($params = array(), $count = false);
+		
+		/* 
+		 * Загрузка записи по ID
+		 */
+		public static function findById($id);
+		
+		/*
+		 * Получаем одну запись
+		 * $params - дополнительные параметры (condition - дополнительное условие, order - параметры сортировки)
+		 */
+		public static function find($params = array());
+		
+		//---------------------------------------------------------------------------------------------
+		
+		/*
+		 * Сохранение
+		 */
+		 public function save();
+		 
+		 /*
+		  * Перед сохранением
+		  */
+		 public function beforeSave();
+		 
+		  /*
+		  * После сохранения
+		  */
+		 public function afterSave();
+	}
+	
+	class FailedQueryException extends Exception {}
+	
+	class EmptyQueryResultException extends Exception {}
+	
 	// Скелет модели
-	class Model
+	class Model implements ModelFunctions
 	{
 		// Таблица модели
-		public static $mysql_table = NULL;
+		protected static $mysql_table = NULL;
 		
 		// Переменные из таблицы (которые надо сохранять и тд)
-		public $mysql_vars = array();
+		protected $mysql_vars = array();
 		
 		// Переменные из таблицы MySQL, которые сохранять не надо
 		protected $_exclude_vars = array("id");
 		
 		// Переменные
-		public $isNewRecord = true;			// Новая запись
+		private $isNewRecord = true;			// Новая запись
 		
 		// Конструктор
 		public function __construct($array = false)
@@ -43,7 +84,7 @@
 				}
 			}
 		}
-		
+
 		/*
 		 * Получаем все записи
 		 * $params - дополнительные параметры (condition - дополнительное условие, order - параметры сортировки)
@@ -57,32 +98,34 @@
 				WHERE true ".(!empty($params["condition"]) ? " AND ".$params["condition"] : "") // Если есть дополнительное условие выборки
 				.(!empty($params["order"]) ? " ORDER BY ".$params["order"] : "")				// Если есть условие сортировки
 				);
-	
-			// Если успешно получили и (что-то есть или нужно просто подсчитать)
-			if ($result && ($result->num_rows || $count))
-			{
-				// Если нужно только подсчитать
-				if ($count)
-				{
-					return $result->num_rows;
-				}
-				
-				// Получаем имя текущего класса
-				$class_name = get_called_class();
-				
-				// Создаем массив объектов
-				while ($array = $result->fetch_assoc())
-				{
-					$return[] = new $class_name($array);
-				}
-				
-				// Возвращаем массив объектов
-				return $return;
+			
+			// Если запрос был неудачным
+			if (!$result) {
+				throw new FailedQueryException("Неудачный запрос к ".static::$mysql_table);
 			}
-			else
+			
+			// Если нужно только подсчитать
+			if ($count)
 			{
-				return false;
+				return $result->num_rows;
 			}
+			
+			// Если ничего не найдено
+			if (!$result->num_rows) {
+				throw new EmptyQueryResultException("По запросу к ".static::$mysql_table."ничего не найдено.");
+			}
+				
+			// Получаем имя текущего класса
+			$class_name = get_called_class();
+				
+			// Создаем массив объектов
+			while ($array = $result->fetch_assoc())
+			{
+				$return[] = new $class_name($array);
+			}
+				
+			// Возвращаем массив объектов
+			return $return;
 		}
 		
 		/*
@@ -97,23 +140,21 @@
 				WHERE true ".(!empty($params["condition"]) ? " AND ".$params["condition"] : "") // Если есть дополнительное условие выборки
 				.(!empty($params["order"]) ? " ORDER BY ".$params["order"] : "")				// Если есть условие сортировки
 				." LIMIT 1");
+			
+			// Если запрос был неудачным
+			if (!$result) {
+				throw new FailedQueryException("Неудачный запрос к ".static::$mysql_table);
+			}
+			
+			// Если ничего не найдено
+			if (!$result->num_rows) {
+				throw new EmptyQueryResultException("По запросу к ".static::$mysql_table."ничего не найдено.");
+			}
 	
-			// Если успешно получили
-			if ($result->num_rows)
-			{
-				// Создаем объект
-				$array = $result->fetch_assoc();
-				
-				// Получаем название класса
-				$class_name = get_called_class();
-				
-				// Возвращаем объект
-				return new $class_name($array);
-			}
-			else
-			{
-				return false;
-			}
+			// Получаем объект вызвавшего класса
+			$array = $result->fetch_assoc();
+			$class_name = get_called_class();
+			return new $class_name($array);
 		}
 		
 		/* 
@@ -123,26 +164,17 @@
 		{
 			// Получаем все данные из таблицы
 			$result = dbSettings()->query("SELECT * FROM ".static::$mysql_table." WHERE id=".$id);
-					
-			// Если успешно получили
-			if ($result)
-			{
-				// Создаем объект
-				$array = $result->fetch_assoc();
-				
-				// Получаем название класса
-				$class_name = get_called_class();
-				
-				// Возвращаем объект
-				return new $class_name($array);	
+			
+			// Если ничего не найдено
+			if (!$result) {
+				throw new EmptyQueryResultException("По id ".$id." в ".static::$mysql_table." ничего не найдено.");
 			}
-			else
-			{
-				return false;
-			}
+
+			// Получаем объект вызвавшего класса
+			$array = $result->fetch_assoc();
+			$class_name = get_called_class();
+			return new $class_name($array);	
 		}
-		
-		
 		
 		/*
 		 * Сохранение
