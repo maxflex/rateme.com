@@ -6,6 +6,8 @@
 	include_once("layouts/header.php");
 	include_once("layouts/menu.php");
 	
+	
+	
 	/* Основные действия */
 	$_controller	 = $_GET["controller"];	// Получаем название контроллера
 	$_action		 = $_GET["action"];		// Получаем название экшена
@@ -23,7 +25,7 @@
 	} // иначе запускаем метод по умолчанию
 	else
 	{
-		$IndexController->{"action".UserController::DEFAULT_ACTION}();
+		$IndexController->{"action".$IndexController->defaultAction}();
 	}
 	
 	/*********************/
