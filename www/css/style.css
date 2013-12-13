@@ -1,5 +1,15 @@
 body {
-	background: url("../img/background/2.jpg") repeat;
+//	background: url("../img/background/2.jpg") repeat;
+}
+
+.bg-blue {
+	background: url("../img/background/2.jpg");
+	width: 100%;
+	height: 100%;
+	top: 0%;
+	position: absolute;
+	background-size: cover;
+	z-index: -1;
 }
 
 /* Rounded avatars */
@@ -52,4 +62,8 @@ input[id="adjective"]{
 
 .trans {
 	color: rgba(255,255,255,0.7);
+}
+
+.text-success-trans {
+  color: rgba(0,255,61,0.58);
 }

@@ -4813,7 +4813,14 @@ input[type="submit"].btn.btn-mini {
 }
 
 .navbar-inverse .navbar-inner {
-  background: url("../img/background/2.jpg") center right repeat-x !important; 
+background: #a1c1ea !important;
+background: -moz-linear-gradient(top,  #a1c1ea 0%, #7a92b8 100%) !important;
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a1c1ea), color-stop(100%,#7a92b8)) !important;
+background: -webkit-linear-gradient(top,  #a1c1ea 0%,#7a92b8 100%) !important;
+background: -o-linear-gradient(top,  #a1c1ea 0%,#7a92b8 100%) !important;
+background: -ms-linear-gradient(top,  #a1c1ea 0%,#7a92b8 100%) !important;
+background: linear-gradient(to bottom,  #a1c1ea 0%,#7a92b8 100%) !important;
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a1c1ea', endColorstr='#7a92b8',GradientType=0 ) !important;
 }
 
 .navbar-inverse .brand,

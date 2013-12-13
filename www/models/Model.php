@@ -19,15 +19,15 @@
 		public function __construct($array = false)
 		{
 			// Запрос к текущей БД на показ столбцов
-			$Query = dbSettings()->query("SHOW COLUMNS FROM ".static::$mysql_table);
-			
+			$Query = static::dbConnection()->query("SHOW COLUMNS FROM ".static::$mysql_table);
+						
 			// Динамически создаем переменные на основе таблицы	
 			while ($data = $Query->fetch_assoc())
 			{
 				$this->mysql_vars[] = $data["Field"];
 				$this->{$data["Field"]} = NULL;
 			}
-			
+						
 			// Если создаем по массиву
 			if (is_array($array))
 			{
@@ -52,7 +52,7 @@
 		public static function findAll($params = array(), $count = false)
 		{
 			// Получаем все данные из таблицы + доп условие, если есть
-			$result = dbSettings()->query("
+			$result = static::dbConnection()->query("
 				SELECT * FROM ".static::$mysql_table." 
 				WHERE true ".(!empty($params["condition"]) ? " AND ".$params["condition"] : "") // Если есть дополнительное условие выборки
 				.(!empty($params["order"]) ? " ORDER BY ".$params["order"] : "")				// Если есть условие сортировки
@@ -92,7 +92,7 @@
 		public static function find($params = array())
 		{
 			// Получаем все данные из таблицы + доп условие, если есть
-			$result = dbSettings()->query("
+			$result = static::dbConnection()->query("
 				SELECT * FROM ".static::$mysql_table."
 				WHERE true ".(!empty($params["condition"]) ? " AND ".$params["condition"] : "") // Если есть дополнительное условие выборки
 				.(!empty($params["order"]) ? " ORDER BY ".$params["order"] : "")				// Если есть условие сортировки
@@ -122,7 +122,7 @@
 		public static function findById($id)
 		{
 			// Получаем все данные из таблицы
-			$result = dbSettings()->query("SELECT * FROM ".static::$mysql_table." WHERE id=".$id);
+			$result = static::dbConnection()->query("SELECT * FROM ".static::$mysql_table." WHERE id=".$id);
 					
 			// Если успешно получили
 			if ($result)
@@ -142,7 +142,13 @@
 			}
 		}
 		
-		
+		/*
+		 * Функция определяет соединение БД
+		 */
+		public static function dbConnection()
+		{
+			return dbSettings();	// По умолчанию возвращает подключение к бд Settings
+		}
 		
 		/*
 		 * Сохранение
@@ -168,9 +174,9 @@
 				 		$values[]	= "'".$this->{$field}."'";		// Оборачиваем значение в кавычки
 			 		}
 			 	}
-	
-				$result = dbSettings()->query("INSERT INTO ".static::$mysql_table." (".implode(",", $into).") VALUES (".implode(",", $values).")");
-				
+
+				$result = static::dbConnection()->query("INSERT INTO ".static::$mysql_table." (".implode(",", $into).") VALUES (".implode(",", $values).")");
+
 				if ($result) {
 					$this->id = $result->insert_id; // Получаем ID
 					$this->isNewRecord = false;		// Уже не новая запись
@@ -191,7 +197,7 @@
 				 	$query[] = $field." = '".$this->{$field}."'";
 			 	}
 			 					
-				$result = dbSettings()->query("UPDATE ".static::$mysql_table." SET ".implode(",", $query)." WHERE id=".$this->id);
+				$result = static::dbConnection()->query("UPDATE ".static::$mysql_table." SET ".implode(",", $query)." WHERE id=".$this->id);
 				
 				if ($result) {
 					$this->afterSave();	// После сохранения

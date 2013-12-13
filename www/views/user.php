@@ -1,3 +1,4 @@
+	<div class="bg-blue"></div>
     <div class="container">
 
       <div class="row">

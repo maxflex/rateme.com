@@ -2,16 +2,36 @@
 	// Подключаем файл конфигураций
 	include_once("config.php");
 	
-	// Лэйаут
-	include_once("layouts/header.php");
-	include_once("layouts/menu.php");
-	
-	
-	
-	/* Основные действия */
+	// Получаем названия контроллеров и экшена	
 	$_controller	 = $_GET["controller"];	// Получаем название контроллера
 	$_action		 = $_GET["action"];		// Получаем название экшена
+
 	
+	// Проверка на аякс-запрос
+	if (strtolower(mb_strimwidth($_action, 0, 4)) == "ajax") {
+		
+		$_ajax_request = true;
+		
+		// Это аякс-запрос, к скрипту можно обращаться только через AJAX
+		if (strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
+			die("SECURITY RESTRICTION: THIS PAGE ACCEPTS AJAX REQUESTS ONLY (poshel nahuj)");	// Выводим мега-сообщение
+		}
+		
+	} else {
+		$_ajax_request = false;
+	}
+	
+	
+	// Если не аякс запрос – грузим лэйаут
+	if (!$_ajax_request) {
+		// Лэйаут
+		include_once("layouts/header.php");
+		include_once("layouts/menu.php");	
+	}
+	
+	
+	
+	/* Основные действия */	
 	$_controllerName = ucfirst(strtolower($_controller))."Controller";	// Преобразуем название контроллера в NameController
 	$_actionName	 = "action".ucfirst(strtolower($_action));			// Преобразуем название экшена в actionName
 	
@@ -33,5 +53,7 @@
 	
 	
 	// Лэйаут
-	include_once("layouts/footer.php");
+	if (!$_ajax_request) {
+		include_once("layouts/footer.php");	
+	}
 ?>
