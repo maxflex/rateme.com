@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$("#adjective").fancyInput();
-	$("#user-page").addClass("animated fadeInDown");
+	$("#user-page").addClass(_page_start_animation);
 });
 
 // Подключаем модуль NG-Animate к приложению UserPage
