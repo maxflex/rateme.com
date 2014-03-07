@@ -1,0 +1,1 @@
+<?php	// Контроллер	class TestController extends Controller	{		public $defaultAction = "Main";				// Папка вьюх		protected $_viewsFolder	= "test";						public function actionMain()		{			$User1 = User::findById(1);			$User2 = User::findById(2);						$this->render("multiple_users", array(				"User1"	=> $User1,				"User2"	=> $User2,			));		}	}

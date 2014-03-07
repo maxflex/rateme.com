@@ -12,11 +12,11 @@
 
 	// Контроллеры и модели 
 	$_controllers	= array(
-		"", "User",
+		"", "User", "Index", "Profile", "Test",
 	);
 	
 	$_models		= array(
-	 	"Model", "User", "Adjective",
+	 	"Model", "User", "Adjective", "Vote", "DefaultAdjective", "Subscription", "Subscriber"
 	 );
 	
 	/********************************************************************/

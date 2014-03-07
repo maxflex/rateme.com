@@ -1,0 +1,726 @@
+/* line 16, ../sass/screen.scss */
+h2 {
+  font-family: "RaleWayThin";
+}
+
+/* line 24, ../sass/screen.scss */
+.animate-repeat.ng-move, .animate-repeat.ng-enter, .animate-repeat.ng-leave {
+  -webkit-transition: all linear;
+  -webkit-transition-delay: 1s;
+  -moz-transition: all linear 1s;
+  -o-transition: all linear 1s;
+  transition: all linear 1s;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+/* line 31, ../sass/screen.scss */
+.animate-repeat.ng-move-active, .animate-repeat.ng-enter-active {
+  -webkit-animation-name: fadeInDown;
+  -moz-animation-name: fadeInDown;
+  -o-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+
+/* line 41, ../sass/screen.scss */
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+  -webkit-animation-duration: 0.5s;
+  -moz-animation-duration: 0.5s;
+  -o-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+/* line 47, ../sass/screen.scss */
+.animate-show.ng-hide-remove-active {
+  -webkit-animation-name: fadeInLeft;
+  -moz-animation-name: fadeInLeft;
+  -o-animation-name: fadeInLeft;
+  animation-name: fadeInLeft;
+}
+
+/* line 55, ../sass/screen.scss */
+.animate-show-right.ng-hide-add, .animate-show-right.ng-hide-remove {
+  -webkit-animation-duration: 0.5s;
+  -moz-animation-duration: 0.5s;
+  -o-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+/* line 61, ../sass/screen.scss */
+.animate-show-right.ng-hide-remove-active {
+  -webkit-animation-name: fadeInRight;
+  -moz-animation-name: fadeInRight;
+  -o-animation-name: fadeInRight;
+  animation-name: fadeInRight;
+}
+
+/* line 70, ../sass/screen.scss */
+.animate-show-hide.ng-hide-add {
+  display: block !important;
+  -webkit-animation-duration: 0.5s;
+  -moz-animation-duration: 0.5s;
+  -o-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+/* line 77, ../sass/screen.scss */
+.animate-show-hide.ng-hide-add-active {
+  -webkit-animation-name: fadeOut;
+  -moz-animation-name: fadeOut;
+  -o-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+/* line 82, ../sass/screen.scss */
+.animate-show-hide.ng-hide-remove {
+  -webkit-animation-duration: 0.5s;
+  -moz-animation-duration: 0.5s;
+  -o-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+/* line 88, ../sass/screen.scss */
+.animate-show-hide.ng-hide-remove-active {
+  -webkit-animation-name: fadeInLeft;
+  -moz-animation-name: fadeInLeft;
+  -o-animation-name: fadeInLeft;
+  animation-name: fadeInLeft;
+}
+
+/* line 97, ../sass/screen.scss */
+.animate-fade.ng-hide-add {
+  display: block !important;
+  -webkit-animation-duration: 0.4s;
+  -moz-animation-duration: 0.4s;
+  -o-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+/* line 104, ../sass/screen.scss */
+.animate-fade.ng-hide-add-active {
+  -webkit-animation-name: fadeOut07;
+  -moz-animation-name: fadeOut07;
+  -o-animation-name: fadeOut07;
+  animation-name: fadeOut07;
+}
+/* line 109, ../sass/screen.scss */
+.animate-fade.ng-hide-remove {
+  -webkit-animation-duration: 0.4s;
+  -moz-animation-duration: 0.4s;
+  -o-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+/* line 115, ../sass/screen.scss */
+.animate-fade.ng-hide-remove-active {
+  -webkit-animation-name: fadeIn07;
+  -moz-animation-name: fadeIn07;
+  -o-animation-name: fadeIn07;
+  animation-name: fadeIn07;
+}
+
+/* line 120, ../sass/screen.scss */
+.trans, .vote-count {
+  opacity: 0.7;
+}
+
+/* line 124, ../sass/screen.scss */
+.text-error, .text-danger {
+  color: #ff0039;
+}
+
+/* line 128, ../sass/screen.scss */
+.text-error-bright {
+  color: #ff3361;
+}
+
+/* line 132, ../sass/screen.scss */
+.text-lime {
+  color: #e8ffe0;
+}
+
+/* line 136, ../sass/screen.scss */
+.vote-count {
+  font-size: 16px;
+  color: white;
+}
+
+/* line 144, ../sass/screen.scss */
+h2.news {
+  cursor: pointer;
+  display: inline-block !important;
+}
+/* line 145, ../sass/screen.scss */
+h2.news .badge-success {
+  background: #3fb618;
+  opacity: 0.8;
+  -webkit-transition: opacity linear;
+  -webkit-transition-delay: 0.2s;
+  -moz-transition: opacity linear 0.2s;
+  -o-transition: opacity linear 0.2s;
+  transition: opacity linear 0.2s;
+}
+/* line 159, ../sass/screen.scss */
+h2.news:hover {
+  opacity: 1;
+}
+/* line 163, ../sass/screen.scss */
+h2.news.selected {
+  opacity: 1 !important;
+}
+
+/* line 174, ../sass/screen.scss */
+h3.foll {
+  width: 50%;
+  margin: 10px auto;
+  font-size: 20px;
+}
+
+/* line 181, ../sass/screen.scss */
+.news-rounded {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  height: 40px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+/* line 189, ../sass/screen.scss */
+.news-div {
+  font-family: "RaleWayLight";
+  margin-top: 30px;
+  color: white;
+  font-size: 17px;
+  width: 100%;
+}
+/* line 196, ../sass/screen.scss */
+.news-div .news-row {
+  margin-bottom: 10px;
+}
+/* line 199, ../sass/screen.scss */
+.news-div .news-row.old {
+  opacity: 0.5;
+}
+/* line 204, ../sass/screen.scss */
+.news-div .subscription-row {
+  margin-bottom: -1px;
+  cursor: pointer;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3px 0;
+}
+/* line 210, ../sass/screen.scss */
+.news-div .subscription-row:hover {
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+/* line 214, ../sass/screen.scss */
+.news-div .subscription-row:hover .subscription-arrow {
+  color: #41ba18;
+}
+/* line 218, ../sass/screen.scss */
+.news-div .subscription-row:hover a.login-link {
+  opacity: 1;
+}
+/* line 224, ../sass/screen.scss */
+.news-div .news-seperator {
+  opacity: 0.2;
+}
+/* line 228, ../sass/screen.scss */
+.news-div span.voted-adj {
+  letter-spacing: 2px;
+  opacity: 0.8;
+}
+/* line 233, ../sass/screen.scss */
+.news-div a.login-link {
+  letter-spacing: 2px;
+  opacity: 0.8;
+  color: white;
+}
+/* line 238, ../sass/screen.scss */
+.news-div a.login-link:hover {
+  opacity: 1;
+}
+
+/* line 244, ../sass/screen.scss */
+.circle {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  height: 56px !important;
+  width: 56px !important;
+  background: white;
+  display: inline-block;
+  opacity: 0.4;
+  font-size: 22px;
+  font-family: "RaleWayRegular";
+  font-weight: 900;
+  cursor: pointer;
+  overflow: hidden;
+}
+/* line 257, ../sass/screen.scss */
+.circle:hover {
+  opacity: 1;
+}
+/* line 261, ../sass/screen.scss */
+.circle span {
+  display: block;
+  margin-top: 16px;
+  color: #6e96d1;
+}
+/* line 262, ../sass/screen.scss */
+.circle span.glyphicon {
+  font-size: 32px;
+  width: 100%;
+}
+
+/* line 272, ../sass/screen.scss */
+.regular {
+  font-family: "RaleWayRegular" !important;
+  font-weight: 900;
+}
+
+/* line 277, ../sass/screen.scss */
+.trans-8 {
+  opacity: 0.8;
+}
+
+/* line 281, ../sass/screen.scss */
+.badge-news {
+  width: 70px;
+  display: inline-block;
+  text-align: center;
+  opacity: 0.7;
+}
+
+/* line 288, ../sass/screen.scss */
+.thumb-circle {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-transition: all linear;
+  -webkit-transition-delay: 0.3s;
+  -moz-transition: all linear 0.3s;
+  -o-transition: all linear 0.3s;
+  transition: all linear 0.3s;
+  color: white;
+  height: 40px !important;
+  width: 40px !important;
+  text-indent: 10.5px;
+  line-height: 40px;
+  top: 0;
+  cursor: pointer;
+  opacity: 0.8;
+  font-size: 20px;
+}
+/* line 301, ../sass/screen.scss */
+.thumb-circle.old {
+  opacity: 1;
+  background: white !important;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  cursor: default;
+}
+/* line 306, ../sass/screen.scss */
+.thumb-circle.old.ofor {
+  color: #41ba18;
+}
+/* line 309, ../sass/screen.scss */
+.thumb-circle.old.oagainst {
+  color: #ff0039;
+}
+/* line 312, ../sass/screen.scss */
+.thumb-circle.old.oplus {
+  color: #0072e6;
+}
+/* line 317, ../sass/screen.scss */
+.thumb-circle:hover {
+  background: white !important;
+  opacity: 1;
+}
+/* line 322, ../sass/screen.scss */
+.thumb-circle.for {
+  background: #41ba18;
+}
+/* line 324, ../sass/screen.scss */
+.thumb-circle.for:hover {
+  color: #41ba18 !important;
+  -webkit-box-shadow: 0px 0px 15px 5px #41ba18;
+  -moz-box-shadow: 0px 0px 15px 5px #41ba18;
+  box-shadow: 0px 0px 15px 5px #41ba18;
+}
+/* line 330, ../sass/screen.scss */
+.thumb-circle.against {
+  background: #ff0039;
+}
+/* line 332, ../sass/screen.scss */
+.thumb-circle.against:hover {
+  color: #ff0039;
+  -webkit-box-shadow: 0px 0px 15px 5px #ff0039;
+  -moz-box-shadow: 0px 0px 15px 5px #ff0039;
+  box-shadow: 0px 0px 15px 5px #ff0039;
+}
+/* line 338, ../sass/screen.scss */
+.thumb-circle.plus {
+  background: #0072e6;
+}
+/* line 340, ../sass/screen.scss */
+.thumb-circle.plus:hover {
+  color: #0072e6;
+  -webkit-box-shadow: 0px 0px 15px 5px #0072e6;
+  -moz-box-shadow: 0px 0px 15px 5px #0072e6;
+  box-shadow: 0px 0px 15px 5px #0072e6;
+}
+
+/* line 347, ../sass/screen.scss */
+.eye {
+  opacity: 0.7;
+}
+/* line 350, ../sass/screen.scss */
+.eye:hover {
+  opacity: 1;
+}
+/* line 354, ../sass/screen.scss */
+.eye.glyphicon-eye-close:hover {
+  color: #e60033;
+}
+/* line 358, ../sass/screen.scss */
+.eye.glyphicon-eye-open:hover {
+  color: #379f15;
+}
+
+/* line 363, ../sass/screen.scss */
+.text-primary {
+  color: #0072e6;
+}
+
+/* line 367, ../sass/screen.scss */
+.a-center {
+  text-align: center;
+}
+
+/* line 371, ../sass/screen.scss */
+.a-right {
+  text-align: right;
+}
+
+/* line 375, ../sass/screen.scss */
+.pointer {
+  cursor: pointer;
+}
+
+/* line 379, ../sass/screen.scss */
+.ava-wrap {
+  height: 300px;
+  width: 300px;
+  position: relative;
+  margin: 0 auto;
+}
+/* line 385, ../sass/screen.scss */
+.ava-wrap .btn {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin-top: 40%;
+}
+/* line 389, ../sass/screen.scss */
+.ava-wrap .btn.first {
+  width: 200px;
+  margin-top: 28%;
+}
+/* line 394, ../sass/screen.scss */
+.ava-wrap .btn.second {
+  width: 200px;
+  margin-top: 10px;
+}
+/* line 401, ../sass/screen.scss */
+.ava-wrap .ava-blink {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  position: absolute;
+  opacity: 0.75;
+  background: white;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+}
+/* line 410, ../sass/screen.scss */
+.ava-wrap .ava-blink.black {
+  background: black;
+}
+/* line 414, ../sass/screen.scss */
+.ava-wrap .ava-blink.edit-profile {
+  -webkit-box-shadow: inset 0 0 100px #6e96d1;
+  -moz-box-shadow: inset 0 0 100px #6e96d1;
+  box-shadow: inset 0 0 100px #6e96d1;
+}
+/* line 418, ../sass/screen.scss */
+.ava-wrap .ava-blink.half {
+  -webkit-border-radius: 300px;
+  -moz-border-radius: 300px 300px 0 0;
+  border-radius: 300px 300px 0 0;
+  -webkit-transform: translate(-17.7%, 14.6%) rotate(-45deg);
+  -moz-transform: translate(-17.7%, 14.6%) rotate(-45deg);
+  -ms-transform: translate(-17.7%, 14.6%) rotate(-45deg);
+  -o-transform: translate(-17.7%, 14.6%) rotate(-45deg);
+  transform: translate(-17.7%, 14.6%) rotate(-45deg);
+  -webkit-box-shadow: inset 0 0 50px 50px #6e96d1;
+  -moz-box-shadow: inset 0 0 50px 50px #6e96d1;
+  box-shadow: inset 0 0 50px 50px #6e96d1;
+  height: 150px;
+  width: 300px;
+}
+
+/* line 428, ../sass/screen.scss */
+.path-icon {
+  height: 67px;
+  width: 67px;
+  position: absolute;
+  right: 0;
+}
+/* line 434, ../sass/screen.scss */
+.path-icon.clickable {
+  -webkit-transition: all linear;
+  -webkit-transition-delay: 0.3s;
+  -moz-transition: all linear 0.3s;
+  -o-transition: all linear 0.3s;
+  transition: all linear 0.3s;
+  opacity: 0.5;
+  cursor: pointer;
+}
+/* line 439, ../sass/screen.scss */
+.path-icon.clickable:hover {
+  opacity: 1;
+}
+/* line 444, ../sass/screen.scss */
+.path-icon.left {
+  left: 0;
+}
+
+/* line 449, ../sass/screen.scss */
+#name-lastname {
+  text-align: center;
+  color: white;
+}
+
+/* line 455, ../sass/screen.scss */
+input[type=text], input[type=password], input[type=email] {
+  background: rgba(1, 1, 1, 0.1);
+  font-family: "RaleWayExtraLight";
+  font-size: 28px;
+  color: white;
+  border: 0;
+  padding: 22px 20px;
+  width: calc(100% - 40px);
+}
+/* line 464, ../sass/screen.scss */
+input[type=text]:disabled, input[type=password]:disabled, input[type=email]:disabled {
+  opacity: 0.5;
+}
+/* line 468, ../sass/screen.scss */
+input[type=text].icon, input[type=password].icon, input[type=email].icon {
+  background-repeat: no-repeat;
+  background-position: right center;
+  padding-right: 70px;
+}
+/* line 473, ../sass/screen.scss */
+input[type=text].icon.compose, input[type=password].icon.compose, input[type=email].icon.compose {
+  background-image: url("../../img/icon/64/compose.png");
+}
+/* line 476, ../sass/screen.scss */
+input[type=text].icon.login, input[type=password].icon.login, input[type=email].icon.login {
+  background-image: url("../../img/icon/64/email.png");
+}
+/* line 479, ../sass/screen.scss */
+input[type=text].icon.profile, input[type=password].icon.profile, input[type=email].icon.profile {
+  background-image: url("../../img/icon/64/profile.png");
+}
+/* line 482, ../sass/screen.scss */
+input[type=text].icon.globe, input[type=password].icon.globe, input[type=email].icon.globe {
+  background-image: url("../../img/icon/64/globe.png");
+}
+/* line 485, ../sass/screen.scss */
+input[type=text].icon.mail, input[type=password].icon.mail, input[type=email].icon.mail {
+  background-image: url("../../img/icon/64/mail.png");
+}
+/* line 489, ../sass/screen.scss */
+input[type=text].icon.locked, input[type=password].icon.locked, input[type=email].icon.locked {
+  background-image: url("../../img/icon/64/locked.png");
+}
+/* line 493, ../sass/screen.scss */
+input[type=text].icon.unlocked, input[type=password].icon.unlocked, input[type=email].icon.unlocked {
+  background-image: url("../../img/icon/64/unlocked.png");
+}
+/* line 496, ../sass/screen.scss */
+input[type=text].icon.vk, input[type=password].icon.vk, input[type=email].icon.vk {
+  background-image: url("../../img/icon/64/vk.png");
+}
+/* line 499, ../sass/screen.scss */
+input[type=text].icon.twitter, input[type=password].icon.twitter, input[type=email].icon.twitter {
+  background-image: url("../../img/icon/64/twitter.png");
+}
+/* line 502, ../sass/screen.scss */
+input[type=text].icon.instagram, input[type=password].icon.instagram, input[type=email].icon.instagram {
+  background-image: url("../../img/icon/64/instagram.png");
+}
+
+/* line 511, ../sass/screen.scss */
+.edit-row hr {
+  width: 118.5%;
+  margin: 10px 0;
+  opacity: 0.3;
+}
+
+/* line 518, ../sass/screen.scss */
+.switchery {
+  background-color: #fff;
+  border: 1px solid #dfdfdf;
+  border-radius: 20px;
+  cursor: pointer;
+  display: inline-block;
+  height: 30px;
+  position: relative;
+  vertical-align: middle;
+  width: 50px;
+}
+/* line 529, ../sass/screen.scss */
+.switchery > small {
+  background: #fff;
+  border-radius: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  height: 30px;
+  position: absolute;
+  top: 0;
+  width: 30px;
+}
+
+/* line 540, ../sass/screen.scss */
+.additional-settings {
+  margin: 15px auto;
+  font-family: "RaleWayExtraLight";
+  font-size: 22px;
+  color: white;
+}
+/* line 545, ../sass/screen.scss */
+.additional-settings td {
+  padding: 10px 0;
+  text-align: left !important;
+}
+/* line 548, ../sass/screen.scss */
+.additional-settings td span {
+  margin-left: 5px;
+}
+/* line 552, ../sass/screen.scss */
+.additional-settings td img {
+  height: 32px;
+  width: 32px;
+}
+/* line 557, ../sass/screen.scss */
+.additional-settings tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* line 565, ../sass/screen.scss */
+.btn.br5 {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+/* line 569, ../sass/screen.scss */
+.btn.save {
+  width: 87%;
+}
+/* line 573, ../sass/screen.scss */
+.btn.dialog {
+  width: 165px;
+}
+
+/* line 582, ../sass/screen.scss */
+.bootbox-body, .modal-title {
+  font-family: "RaleWayLight";
+  font-size: 20px;
+}
+/* line 585, ../sass/screen.scss */
+.bootbox-body img, .modal-title img {
+  height: 42px;
+  width: 42px;
+  margin-right: 10px;
+}
+
+/* line 592, ../sass/screen.scss */
+.bootbox-input-text {
+  font-family: "Open Sans", Calibri, Candara, Arial, sans-serif !important;
+  font-weight: normal !important;
+  padding: 10px !important;
+  width: calc(100% - 20px) !important;
+  color: black !important;
+  background: white !important;
+  font-size: 18px !important;
+  border: 1px solid black !important;
+}
+
+/* line 603, ../sass/screen.scss */
+.saved {
+  width: 87%;
+  margin: 20px auto;
+  font-size: 20px;
+}
+
+/* line 609, ../sass/screen.scss */
+.subscription-arrow {
+  opacity: 0.8;
+  font-size: 20px;
+  top: 9px;
+}
+
+/* line 615, ../sass/screen.scss */
+.arrow-back {
+  position: absolute;
+  top: 2%;
+  cursor: pointer;
+}
+/* line 620, ../sass/screen.scss */
+.arrow-back:hover {
+  color: #41ba18;
+}
+/* line 624, ../sass/screen.scss */
+.arrow-back.big {
+  color: white;
+  font-size: 35px;
+  opacity: 0.5;
+}
+/* line 628, ../sass/screen.scss */
+.arrow-back.big:hover {
+  opacity: 1;
+}
+
+/* line 634, ../sass/screen.scss */
+.cursor-default {
+  cursor: default;
+}

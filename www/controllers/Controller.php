@@ -4,6 +4,9 @@
 		// Экшн по умолчанию
 		public $defaultAction = "Main";
 		
+		// Папка VIEWS
+		protected $_viewsFolder	= "";
+		
 		
 		/*
 		 * Отобразить view
@@ -18,7 +21,16 @@
 				}
 			}
 			
-			include_once(BASE_ROOT."/views/{$view}.php");
+			include_once(BASE_ROOT."/views/".(!empty($this->_viewsFolder) ? $this->_viewsFolder."/" : "")."{$view}.php");
+		}
+		
+		
+		/*
+		 * Редирект
+		 */
+		protected function redirect($parameters)
+		{
+			header("Location: index.php?".http_build_query($parameters));
 		}
 	}
 ?>

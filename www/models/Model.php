@@ -12,6 +12,9 @@
 		// Переменные из таблицы MySQL, которые сохранять не надо
 		protected $_exclude_vars = array("id");
 		
+		// Если есть сериализованные данные в БД, то указать здесь для авто сериализации/ансериализации
+		protected $_serialized = array();
+		
 		// Переменные
 		public $isNewRecord = true;			// Новая запись
 		
@@ -25,7 +28,6 @@
 			while ($data = $Query->fetch_assoc())
 			{
 				$this->mysql_vars[] = $data["Field"];
-				$this->{$data["Field"]} = NULL;
 			}
 						
 			// Если создаем по массиву
@@ -42,6 +44,13 @@
 					$this->isNewRecord = false;	
 				}
 			}
+			
+			// Если есть сериализованные данные – делаем ансериалайз для доступности (потом перед сохранением назад в сериалайз)
+			if ($this->_serialized) {
+				foreach ($this->_serialized as $serialized_field) {
+					$this->{$serialized_field} = unserialize($this->{$serialized_field});
+				}
+			}
 		}
 		
 		/*
@@ -56,6 +65,7 @@
 				SELECT * FROM ".static::$mysql_table." 
 				WHERE true ".(!empty($params["condition"]) ? " AND ".$params["condition"] : "") // Если есть дополнительное условие выборки
 				.(!empty($params["order"]) ? " ORDER BY ".$params["order"] : "")				// Если есть условие сортировки
+				.(!empty($params["limit"]) ? " LIMIT ".$params["limit"] : "")					// Если есть условие лимита
 				);
 	
 			// Если успешно получили и (что-то есть или нужно просто подсчитать)
@@ -143,6 +153,16 @@
 		}
 		
 		/*
+		 * Получаем ID последней записи
+		 */
+		public static function lastId()
+		{
+		 	return static::dbConnection()
+		 		->query("SELECT * FROM ".static::$mysql_table." ORDER BY id DESC LIMIT 1")
+		 		->fetch_assoc()["id"];
+		}
+		 
+		/*
 		 * Функция определяет соединение БД
 		 */
 		public static function dbConnection()
@@ -171,16 +191,22 @@
 			 		if (isset($this->{$field}))
 			 		{
 				 		$into[]		= $field;
-				 		$values[]	= "'".$this->{$field}."'";		// Оборачиваем значение в кавычки
+				 		
+				 		// Если текущее поле в формате serialize
+				 		if (in_array($field, $this->_serialized)) {
+					 		$values[]	= "'".serialize($this->{$field})."'";		// Сериализуем значение обратно
+				 		} else {
+					 		$values[]	= "'".$this->{$field}."'";					// Оборачиваем значение в кавычки		
+				 		}				 		
 			 		}
 			 	}
 
 				$result = static::dbConnection()->query("INSERT INTO ".static::$mysql_table." (".implode(",", $into).") VALUES (".implode(",", $values).")");
-
+				// echo "The query was: "."INSERT INTO ".static::$mysql_table." (".implode(",", $into).") VALUES (".implode(",", $values).")";
 				if ($result) {
-					$this->id = $result->insert_id; // Получаем ID
-					$this->isNewRecord = false;		// Уже не новая запись
-					$this->afterSave();				// После сохранения
+					$this->id = static::dbConnection()->insert_id; 	// Получаем ID
+					$this->isNewRecord = false;						// Уже не новая запись
+					$this->afterSave();								// После сохранения
 					return true;
 				} else {
 					return false;
@@ -193,8 +219,13 @@
 			 	{
 			 		if (in_array($field, $this->_exclude_vars)) // Пропускаем поля, которые не надо сохранять
 			 			continue;
-			 			
-				 	$query[] = $field." = '".$this->{$field}."'";
+			 		
+			 		// Если текущее поле в формате serialize
+				 	if (in_array($field, $this->_serialized)) {
+				 		$query[] = $field." = '".serialize($this->{$field})."'";	// Сериализуем значение
+				 	} else {
+					 	$query[] = $field." = '".$this->{$field}."'";
+				 	}
 			 	}
 			 					
 				$result = static::dbConnection()->query("UPDATE ".static::$mysql_table." SET ".implode(",", $query)." WHERE id=".$this->id);
@@ -223,6 +254,18 @@
 		 public function afterSave()
 		 {
 			 // Будет переопределяться в child-классах
+		 }
+		 
+		 /*
+		  * Полностью удалить модель
+		  */
+		 public function delete()
+		 {
+		 	// Удаляем из БД
+			static::dbConnection()->query("DELETE FROM ".static::$mysql_table." WHERE id=".$this->id);
+			
+			// Удаляем объект
+			unset($this);
 		 }
 		
 	}

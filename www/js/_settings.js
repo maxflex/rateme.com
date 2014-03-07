@@ -1,0 +1,1 @@
+var _page_start_animation = "animated fadeInDown";

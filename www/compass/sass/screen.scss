@@ -1,0 +1,636 @@
+	// Подключаем для работы с CSS3
+	@import "compass/css3";
+
+	// Цвета
+	$success: 		#41ba18;
+	$success-hover:	#379f15;
+	$success-badge: #3fb618;
+	
+	$danger:		#ff0039;
+	$danger-hover:	#e60033;
+	
+	$background:	#6e96d1; // Синий под фон
+	$primary:		#0072e6; // Обычный синий
+
+
+h2 {
+	font-family: "RaleWayThin";
+}
+
+// Анимация добавления нового прилагательного
+.animate-repeat {
+	
+	// Параметры анимации
+	&.ng-move, &.ng-enter, &.ng-leave {
+		@include transition(all linear 1s);
+		@include animation-duration(1s);
+		@include animation-fill-mode(both);
+	}
+	
+	// Конец анимации
+	&.ng-move-active, &.ng-enter-active {
+		@include animation-name(fadeInDown);
+	}
+	
+}
+
+// Анимация NG-SHOW
+.animate-show{
+	
+	// Параметры анимации
+	&.ng-hide-add, &.ng-hide-remove {
+		@include animation-duration(0.5s);
+		@include animation-fill-mode(both);
+	}
+	
+	// Начало анимации
+	&.ng-hide-remove-active {
+		@include animation-name(fadeInLeft);
+	}
+} 
+
+// Анимация NG-SHOW
+.animate-show-right{
+	// Параметры анимации
+	&.ng-hide-add, &.ng-hide-remove {
+		@include animation-duration(0.5s);
+		@include animation-fill-mode(both);
+	}
+	
+	// Начало анимации
+	&.ng-hide-remove-active {
+		@include animation-name(fadeInRight);
+	}
+}
+
+// Анимация NG-SHOW/NG-HIDE
+.animate-show-hide {
+	
+	// Параметры анимации
+	&.ng-hide-add {
+		display: block !important;
+		@include animation-duration(0.5s);
+		@include animation-fill-mode(both);
+	}
+	
+	// Начало анимации
+	&.ng-hide-add-active {
+		@include animation-name(fadeOut);
+	}
+	
+	// Параметры анимации
+	&.ng-hide-remove {
+		@include animation-duration(0.5s);
+		@include animation-fill-mode(both);
+	}
+	
+	// Конец анимации
+	&.ng-hide-remove-active {
+		@include animation-name(fadeInLeft);
+	}
+} 
+
+// Анимация NG-SHOW/NG-HIDE
+.animate-fade {
+	
+	// Параметры анимации
+	&.ng-hide-add {
+		display: block !important;
+		@include animation-duration(0.4s);
+		@include animation-fill-mode(both);
+	}
+	
+	// Начало анимации
+	&.ng-hide-add-active {
+		@include animation-name(fadeOut07);
+	}
+	
+	// Параметры анимации
+	&.ng-hide-remove {
+		@include animation-duration(0.4s);
+		@include animation-fill-mode(both);
+	}
+	
+	// Конец анимации
+	&.ng-hide-remove-active {
+		@include animation-name(fadeIn07);
+	}
+} 
+
+.trans {
+	opacity: 0.7;
+}
+
+.text-error, .text-danger {
+	color: $danger;
+}
+
+.text-error-bright {
+	color: lighten($danger, 10%);
+}
+
+.text-lime {
+	color: #e8ffe0;
+}
+
+.vote-count {
+	@extend .trans;
+	font-size: 16px;
+	color: white;
+}
+
+
+h2 {
+	&.news {
+		& .badge-success {
+			background: $success-badge;
+			opacity: 0.8;
+			@include transition(opacity linear 0.2s);
+		}
+		
+		$border-width: 3px;
+		
+		cursor: pointer;
+		display: inline-block !important;
+//		padding-left: 5px;
+//		border-left: $border-width solid rgba(0,0,0,0.1);
+//		@include transition(border-left linear 0.3s);
+		
+		&:hover {
+			opacity: 1;
+		}
+		
+		&.selected {
+			opacity: 1 !important;
+			& .badge-success {
+			//	opacity: 1;
+			}
+//			border-left: $border-width solid $success-badge;
+		}
+	}
+}
+
+h3 {
+	&.foll {
+		width: 50%;
+		margin: 10px auto;
+		font-size: 20px;
+	}
+}
+
+.news-rounded {
+	@include border-radius(50%);
+	height: 40px;
+	display: inline-block;
+	margin-right: 10px;
+//	margin-left: 5px;
+}
+
+.news-div {
+	font-family: "RaleWayLight";
+	margin-top: 30px;
+	color: white;
+	font-size: 17px;
+	width: 100%;
+	
+	& .news-row {
+		margin-bottom: 10px;
+		
+		&.old {
+			opacity: 0.5;
+		}
+	}
+	
+	& .subscription-row {
+		margin-bottom: -1px;
+		cursor: pointer;
+		border-top: 1px solid rgba(255,255,255,0.1);
+		border-bottom: 1px solid rgba(255,255,255,0.1);
+		padding: 3px 0;
+		&:hover {
+			border-top: 1px solid rgba(255,255,255,0.3);
+			border-bottom: 1px solid rgba(255,255,255,0.3);
+			
+			.subscription-arrow {
+				color: $success;
+			}
+			
+			a.login-link {
+				opacity: 1;
+			}
+		}
+	}
+	
+	& .news-seperator {
+		opacity: 0.2;
+	}
+	
+	& span.voted-adj {
+		letter-spacing: 2px;
+		opacity: 0.8;
+	}
+	
+	& a.login-link {
+		letter-spacing: 2px;
+		opacity: 0.8;
+		color: white;
+		
+		&:hover {
+			opacity: 1;
+		}
+	}
+}
+
+.circle {
+	@include border-radius(50%);
+	height: 56px !important;
+	width: 56px !important;
+	background: white;
+	display: inline-block;
+	opacity: 0.4;
+	font-size: 22px;
+	font-family: "RaleWayRegular";
+	font-weight: 900;
+	cursor: pointer;
+	overflow: hidden;
+	
+	&:hover {
+		opacity: 1;
+	}
+	
+	span {
+		&.glyphicon {
+			font-size: 32px;
+			width: 100%;
+		}
+		display: block;
+		margin-top: 16px;
+		color: $background;
+	}
+}
+
+.regular {
+	font-family: "RaleWayRegular" !important;
+	font-weight: 900;
+}
+
+.trans-8 {
+	opacity: 0.8;
+}
+
+.badge-news {
+	width: 70px;
+	display: inline-block;
+	text-align: center;
+	opacity: 0.7;
+}
+
+.thumb-circle {
+	@include border-radius(50%);
+	@include transition(all linear 0.3s);
+	color: white;
+	height: 40px !important;
+	width: 40px !important;
+	text-indent: 10.5px;	
+	line-height: 40px;
+	top: 0;
+	cursor: pointer;
+	opacity: 0.8;
+	font-size: 20px;
+	
+	&.old {
+		opacity: 1;
+		background: white !important;
+		@include transition(none);
+		cursor: default;
+		&.ofor {
+			color: $success;
+		}
+		&.oagainst {
+			color: $danger;
+		}
+		&.oplus {
+			color: $primary;
+		}
+	}
+	
+	&:hover {
+		background: white !important;
+		opacity: 1;
+	}
+	
+	&.for {
+		background: $success;
+		&:hover {
+			color: $success !important;
+			@include box-shadow(0px 0px 15px 5px $success);
+		}
+	}
+	
+	&.against {
+		background: $danger;
+		&:hover {
+			color: $danger;
+			@include box-shadow(0px 0px 15px 5px $danger);
+		}
+	}
+	
+	&.plus {
+		background: $primary;
+		&:hover {
+			color: $primary;
+			@include box-shadow(0px 0px 15px 5px $primary);
+		}
+	}
+}
+
+.eye {
+	opacity: 0.7;
+	
+	&:hover {
+		opacity: 1;
+	}
+	
+	&.glyphicon-eye-close:hover {
+		color: $danger-hover;
+	}
+	
+	&.glyphicon-eye-open:hover {
+		color: $success-hover;
+	}
+}
+
+.text-primary {
+	color: $primary;
+}
+
+.a-center {
+	text-align: center;
+}
+
+.a-right {
+	text-align: right;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.ava-wrap {
+	height: 300px;
+	width: 300px;
+	position: relative;
+	margin: 0 auto;
+	
+	& .btn {
+		@include border-radius(5px);
+		margin-top: 40%;
+		
+		&.first {
+			width: 200px;
+			margin-top: 28%;
+		}
+		
+		&.second {
+			width: 200px;
+			margin-top: 10px;
+		}
+	}
+
+	
+	& .ava-blink{
+		@include border-radius(50%);
+		position: absolute;
+		opacity: 0.75;
+		background: white;
+		height: 100%;
+		width: 100%;
+		z-index: 2;
+		
+		&.black {
+			background: black;
+		}
+		
+		&.edit-profile {
+			@include box-shadow(inset 0 0 100px $background);
+		}
+		
+		&.half {
+			@include border-radius(300px 300px 0 0);
+			@include transform(translate(-17.7%, 14.6%) rotate(-45deg));
+			@include box-shadow(inset 0 0 50px 50px $background);
+			height: 150px;
+			width: 300px;
+		}
+	}
+}
+
+.path-icon {
+	height: 67px;
+	width: 67px;
+	position: absolute;
+	right: 0;
+	
+	&.clickable {
+		@include transition(all linear 0.3s);
+//		right: 75px; 
+		opacity: 0.5;
+		cursor: pointer;
+		&:hover {
+			opacity: 1;
+		}
+	}
+	
+	&.left {
+		left: 0;
+	}
+}
+
+#name-lastname {
+	text-align: center; 
+	color: white;
+}
+
+input {
+	&[type=text], &[type=password], &[type=email] {
+		background: rgba(1,1,1,0.1);
+		font-family: "RaleWayExtraLight";
+		font-size: 28px;
+		color: white;
+		border: 0;
+		padding: 22px 20px;
+		width: calc(100% - 40px);
+		
+		&:disabled {
+			opacity: 0.5;
+		}
+		
+		&.icon {
+			background-repeat: no-repeat;
+			background-position: right center;
+			padding-right: 70px;
+			
+			&.compose {
+				background-image: url("../../img/icon/64/compose.png");
+			}
+			&.login {
+				background-image: url("../../img/icon/64/email.png");
+			}
+			&.profile {
+				background-image: url("../../img/icon/64/profile.png");
+			}
+			&.globe {
+				background-image: url("../../img/icon/64/globe.png");
+			}
+			&.mail {
+				background-image: url("../../img/icon/64/mail.png");
+			}
+			
+			&.locked {
+				background-image: url("../../img/icon/64/locked.png");
+			}
+			
+			&.unlocked {
+				background-image: url("../../img/icon/64/unlocked.png");
+			}
+			&.vk {
+				background-image: url("../../img/icon/64/vk.png");
+			}
+			&.twitter {
+				background-image: url("../../img/icon/64/twitter.png");
+			}
+			&.instagram {
+				background-image: url("../../img/icon/64/instagram.png");
+			}
+		}
+		
+	}
+}
+
+.edit-row {
+	hr {
+		width: 118.5%;
+		margin: 10px 0;
+		opacity: 0.3;
+	}
+}
+
+.switchery {
+  background-color: #fff;
+  border: 1px solid #dfdfdf;
+  border-radius: 20px;
+  cursor: pointer;
+  display: inline-block;
+  height: 30px;
+  position: relative;
+  vertical-align: middle;
+  width: 50px;
+  
+  & > small {
+	  background: #fff;
+	  border-radius: 100%;
+	  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+	  height: 30px;
+	  position: absolute;
+	  top: 0;
+	  width: 30px;
+  }
+} 
+
+.additional-settings {
+	margin: 15px auto;
+	font-family: "RaleWayExtraLight";
+	font-size: 22px;
+	color: white;
+	& td {
+		padding: 10px 0;
+		text-align: left !important;
+		& span {
+			
+			margin-left: 5px;
+		}
+		& img {
+			height: 32px;
+			width: 32px;
+		}
+	}
+	& tr {
+		border-bottom: 1px solid rgba(255,255,255,0.2);
+	//	margin-top: 100px;
+	}
+}
+
+.btn {
+	// br5
+	&.br5 {
+		@include border-radius(5px);
+	}
+	
+	&.save {
+		width: 87%;
+	}
+	
+	&.dialog {
+		width: 165px;
+	}
+	
+	&.disabled, &[disabled] {
+	//	@include transition(opacity linear 0.5s, background linear 0.5s);
+	}
+}
+
+.bootbox-body, .modal-title {
+	font-family: "RaleWayLight";
+	font-size: 20px;
+	& img {
+		height: 42px;
+		width: 42px;
+		margin-right: 10px;
+	}
+}
+
+.bootbox-input-text {
+	font-family: "Open Sans", Calibri, Candara, Arial, sans-serif !important;
+	font-weight: normal !important;
+	padding: 10px !important;
+	width: calc(100% - 20px) !important;
+	color: black !important;
+	background: white !important;
+	font-size: 18px !important;
+	border: 1px solid black !important;
+}
+
+.saved {
+	width: 87%;
+	margin: 20px auto;
+	font-size: 20px;
+}
+
+.subscription-arrow {
+	opacity: 0.8;
+	font-size: 20px;
+	top: 9px;
+}
+
+.arrow-back {
+	position: absolute;
+	top: 2%;
+	cursor: pointer;
+	
+	&:hover {
+		color: $success;
+	}
+	
+	&.big {
+		color: white;  
+		font-size: 35px;
+		opacity: 0.5;
+		&:hover {
+			opacity: 1;
+		}
+	}
+}
+
+.cursor-default {
+	cursor: default;
+}
