@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$("#profile-page").addClass("animated fadeInLeft");
+	$("#profile-page").addClass(_page_additional_start_animation);
 });
 
 

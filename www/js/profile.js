@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$("#profile-page").addClass("animated fadeInDown");
+	$("#profile-page").addClass(_page_start_animation);
 });
 
 // Подключаем модуль NG-Animate к приложению UserPage
