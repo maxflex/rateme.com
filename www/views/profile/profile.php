@@ -8,7 +8,7 @@
 		<div class="col-md-4 center-content">
 			<div class="ava-wrap" ng-mouseenter="ehover = true" ng-mouseleave="ehover = false">
 				<div class="ava-blink edit-profile animate-fade" ng-hide="!ehover">
-					<button class="btn btn-success btn-large" onclick="goTo('profile', 'edit')">Редактировать профиль</button>
+					<button class="btn btn-success btn-large" onclick="goTo('profile', 'edit')"><span class="glyphicon glyphicon-pencil"></span>Редактировать профиль</button>
 				</div>
 			<img class="avatar center nofloat <?=($User->stretch ? "stretch" : "")?>" style="background-image: url('<?=$User->avatar?>')">
 			</div>

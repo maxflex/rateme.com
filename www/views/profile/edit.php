@@ -7,7 +7,7 @@
 		<div class="col-md-4 center-content">
 			<div class="ava-wrap" ng-mouseenter="ehover = true" ng-mouseleave="ehover = false">
 				<div class="ava-blink edit-profile animate-fade" ng-hide="!ehover">
-					<button class="btn first btn-success btn-large" ng-click="newAva()">Изменить</button>
+					<button class="btn first btn-success btn-large" ng-click="newAva()"><span class="glyphicon glyphicon-camera"></span>Изменить</button>
 					<button class="btn second btn-danger btn-large" ng-click="deleteAva()" ng-disabled="delete_disable">Удалить</button>
 				</div>
 				<img class="avatar center nofloat" ng-class="{'stretch' : user.stretch == 1}" style="background-image: url('{{ user.avatar }}')">

@@ -75,7 +75,7 @@
 	<?php
 		} else {
 	?>
-			<h3 ng-show="show" class="chat center-content text-white badge-primary animate-show-hide">Настройки</h3>
+			<h3 ng-show="show" class="chat center-content text-white badge-primary animate-show-hide"><span class="glyphicon glyphicon-cog"></span> Настройки</h3>
 	<?php
 		}
 	?>	

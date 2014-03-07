@@ -634,3 +634,10 @@ input {
 .cursor-default {
 	cursor: default;
 }
+
+button {
+	& .glyphicon {
+		margin-right: 6px;
+		font-size: 15px;
+	}
+}

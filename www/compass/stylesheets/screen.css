@@ -724,3 +724,9 @@ input[type=text].icon.instagram, input[type=password].icon.instagram, input[type
 .cursor-default {
   cursor: default;
 }
+
+/* line 639, ../sass/screen.scss */
+button .glyphicon {
+  margin-right: 6px;
+  font-size: 15px;
+}
