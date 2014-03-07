@@ -88,6 +88,14 @@
 		}
 		
 		/*
+		 * Проверяем, залогинен ли пользователь
+		 */
+		public static function loggedIn()
+		{
+			return isset($_SESSION["user"]);
+		}
+		
+		/*
 		 *  Проверка логина на занятость
 		 * @string $login – логин, который проверяется на занятость
 		 * return – true,  когда логин уже занят

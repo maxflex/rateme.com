@@ -82,6 +82,11 @@ angular.module('UserPage', ['ngAnimate']);
 			$.post("?controller=user&action=AjaxHide", {"id" : adj.id});
 		}
 		
+		// Сообщение о том, что необходимо войти
+		$scope.notLoggedIn = function() {
+			bootbox.alert(_ALERT_CAUTION + "<a href='?controller=index'>Войдите</a>, чтобы подписаться на пользователя");
+		}
+		
 		// Добавить мысль о человеке
 		$scope.think = function(){			
 			

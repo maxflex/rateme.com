@@ -12,7 +12,7 @@
 
 	// Контроллеры и модели 
 	$_controllers	= array(
-		"", "User", "Index", "Profile", "Test",
+		"", "User", "Index", "Profile", "Test", "Auth"
 	);
 	
 	$_models		= array(
