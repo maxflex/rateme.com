@@ -26,7 +26,7 @@
 					<div class="circle" ng-mouseenter="followers = true" ng-mouseleave="followers = false" onclick="goTo('profile', 'subscribers')"><span><?= $User->subscribers ?></span></div>
 <!-- 					<div class="circle" ng-mouseenter="following = true" ng-mouseleave="following = false"><span>23</span></div>	 -->
 			
-					<h3 ng-show="followers" class="foll center-content text-white badge-primary animate-show-hide"><span class="glyphicon glyphicon-user"></span> Подписчики</h3>
+					<h3 ng-show="followers" class="foll center-content text-white badge-primary animate-show-hide"><span class="glyphicon glyphicon-user"></span>Подписчики</h3>
 <!-- 					<h3 ng-show="following" class="foll center-content text-white badge-primary animate-show">Подписки</h3>						 -->
 			</div>				
 		</div>

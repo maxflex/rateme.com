@@ -625,6 +625,8 @@ input {
 		color: white;  
 		font-size: 35px;
 		opacity: 0.5;
+		top: 0;
+		line-height: 61px;
 		&:hover {
 			opacity: 1;
 		}
@@ -640,4 +642,71 @@ button {
 		margin-right: 6px;
 		font-size: 15px;
 	}
+}
+
+h3 {
+	font-family: "RaleWayThin";
+	
+	&.mg-top {
+		margin-top: 20px;	
+	}
+	
+	& .glyphicon {
+		margin-right: 8px;
+		display: inline;
+	//	font-size: 22px;
+	}
+}
+
+.navbar {
+	& .nav {
+		& > li {
+			& .count {
+				position: absolute;
+				background: $danger-hover;
+				@include border-radius(5px);
+				font-size: 10px;
+				text-align: center;
+				vertical-align: middle;
+				display: table-cell;
+				height: 20px;
+				width: 20px;
+				border: 1px solid white;
+				top: 3px;
+				right: 3px;
+				color: white;
+				overflow: hidden;
+				font-family: Arial, Helvetica, sans-serif;
+				font-weight: normal;
+				line-height: 20px;
+				z-index: 5;
+				// Если цифра в кружочке однозначная, делаем шрифт ее больше (digit 1)
+				&.d1 {
+					font-size: 12px;
+				}
+			}
+			
+			& .glyphicon {
+				font-size: 20px;
+				top: 0;
+				
+				&.inline {
+					font-size: 14px;
+					margin-right: 5px;
+					top: 1px;
+				}
+			}
+		}
+	}
+}
+
+
+label {
+	color: white;
+	font-size: 22px;
+	float: left;
+}
+
+.form-group {
+	margin-bottom: 10px;
 }

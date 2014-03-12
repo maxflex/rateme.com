@@ -7,10 +7,58 @@
 	</div>
     <div class="nav-collapse">
 	<ul class="nav pull-right">
-        <li <?=($_GET["controller"] == "profile" ? "class='active'" : "")?>><a href="index.php?controller=profile">ПРОФИЛЬ</a></li>
-        <li <?=($_GET["controller"] == "user" ? "class='active'" : "")?>><a href="index.php?controller=user&user=<?=$_SESSION["user"]->login?>">ОЦЕНКИ</a></li>
-        <li><a href="#">РЕЙТИНГ</a></li>
-        <li><a href="index.php?controller=index">ВЫХОД</a></li>
+	<?php
+		/************ МЕНЮ ДЛЯ ЗАЛОГИНЕННЫХ ************/
+		
+		// Выводим пункт меню «Уведомления» только если пользователь залогинен
+		if (!empty($_SESSION["user"])) {
+			// Получаем пользователя
+			$User = User::fromSession();
+			
+			echo "<li ".menuActive("profile", "").">";
+			// Если есть новости, выводим
+			$NewsCount = $User->newsCount();
+			
+			if ($NewsCount) {
+				// Если кол-во новостей меньше 10, то циферка больше шрифтом
+				echo '<span class="count '.($NewsCount < 10 ? 'd1' : '').'">'.$NewsCount.'</span>';
+			}
+			
+			// Отображаем сам пункт меню
+			?>
+        	<a href="index.php?controller=profile">
+        		<span class="flaticon-church2"></span>
+        	</a>
+			</li>
+			
+			<!-- ПУНКТ МЕНЮ «ПРОФИЛЬ» -->
+			<li <?=(menuActive("user", null, array("user" => $User->login)))?> >
+        		<a href="index.php?controller=user&user=<?= $User->login ?>"><span class="glyphicon glyphicon-user"></span></a>
+        	 </li>
+        	<!-- КОНЕЦ МЕНЮ «ПРОФИЛЬ» -->
+
+			<!-- ПУНКТ МЕНЮ «НАСТРОЙКИ» -->
+			<li <?=(menuActive("profile", "edit"))?> >
+        		<a href="index.php?controller=profile&action=edit"><span class="glyphicon glyphicon-th"></span></a>
+        	 </li>
+        	<!-- КОНЕЦ МЕНЮ «НАСТРОЙКИ» -->
+        	
+        	<!-- ПУНКТ МЕНЮ «ВЫХОД» -->
+        	<li>
+        		<a href="index.php?controller=index&action=logout"><span class="glyphicon glyphicon-log-out"></span></a>
+        	</li>
+        	<!-- КОНЕЦ МЕНЮ «ВЫХОД» -->
+	<?php
+		} else {
+			/************ МЕНЮ ДЛЯ НЕ ЗАЛОГИНЕННЫХ ************/
+			// Иначе пункты меню для незалогененных
+			?>
+			<li>
+        		<a href="index.php?controller=index"><span class="glyphicon glyphicon-log-in inline"></span>Вход</a>
+        	</li>
+			<?php
+		}
+	?>
       </ul>
 	</div><!-- /.nav-collapse -->
   </div>

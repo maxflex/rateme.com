@@ -1,7 +1,8 @@
 <div class="container" ng-app="ProfileEdit" id="main-page" ng-controller="ProfileEditCtrl" ng-init="<?=angInit("user", $user_data)?>">
-	<span class="arrow-back big glyphicon glyphicon-chevron-left pull-left path-icon clickable left" onclick="goBack()"></span>
 <!-- 	<img src="img/icon/settings.png" class="path-icon"> -->
-	<h1 id="name-lastname">Редактирование профиля</h1>
+	<h1 id="name-lastname">Редактирование профиля
+		<span class="arrow-back big glyphicon glyphicon-chevron-left pull-left path-icon clickable left" onclick="goBack()"></span>
+	</h1>
 	<hr>
 	<div class="row effect2">
 		<div class="col-md-4 center-content">
@@ -43,7 +44,7 @@
 			
 			<button class="btn btn-primary btn-large br5 save" ng-click="save()" ng-disabled="saving || login_error || email_error || password_error">Сохранить</button>	
 			
-			<h3 ng-show="saved" class="center-content text-white badge-success saved animate-show-hide"><span class="glyphicon glyphicon-ok"></span> Сохранено</h3>		
+			<h3 ng-show="saved" class="center-content text-white badge-success saved animate-show-hide"><span class="glyphicon glyphicon-ok"></span>Сохранено</h3>		
 		</div>
 		
 		<div class="col-md-6">

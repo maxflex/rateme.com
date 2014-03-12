@@ -43,6 +43,11 @@
 	
 	$IndexController = new $_controllerName;	// Создаем объект контроллера
 	
+	// Запускаем BeforeAction, если существует
+	if (method_exists($IndexController, "beforeAction")) {
+		$IndexController->beforeAction();
+	}
+	
 	// Если указанный _actionName существует – запускаем его
 	if (method_exists($IndexController, $_actionName))
 	{
@@ -52,6 +57,12 @@
 	{
 		$IndexController->{"action".$IndexController->defaultAction}();
 	}
+	
+	// Когда понадобится AfterAction – раскомментировать
+	/* // Запускаем afterAction, если существует
+	if (method_exists($IndexController, "afterAction")) {
+		$IndexController->afterAction();
+	} */
 	
 	/*********************/
 	

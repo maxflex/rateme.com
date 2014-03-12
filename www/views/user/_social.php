@@ -71,13 +71,13 @@
 		if (!$own_page) {
 	?>
 			<h3 ng-show="show" class="chat center-content text-white animate-show-hide" ng-class="{'badge-primary' : !subscribed, 'badge-success' : subscribed}">
-				<span ng-hide="subscribed" class="animate-show"><span class="glyphicon glyphicon-user"></span> Подписаться</span>
-				<span ng-show="subscribed" class="animate-show"><span class="glyphicon glyphicon-ok"></span> Подписка оформлена</span>
+				<span ng-hide="subscribed" class="animate-show"><span class="glyphicon glyphicon-user"></span>Подписаться</span>
+				<span ng-show="subscribed" class="animate-show"><span class="glyphicon glyphicon-ok"></span>Подписка оформлена</span>
 			</h3>
 	<?php
 		} else {
 	?>
-			<h3 ng-show="show" class="chat center-content text-white badge-primary animate-show-hide"><span class="glyphicon glyphicon-cog"></span> Настройки</h3>
+			<h3 ng-show="show" class="chat center-content text-white badge-primary animate-show-hide"><span class="glyphicon glyphicon-cog"></span>Настройки</h3>
 	<?php
 		}
 	?>	

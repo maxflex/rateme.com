@@ -196,6 +196,46 @@
 			 	.$params["text"]."</a>";
 	}
 	
+	/*
+	 * Проверяет активен ли пункт меню
+	 * $controller	– контроллер, при котором пункт меню активен
+	 * $action		– экшн, при котором пункт меню становится активен
+	 * $params (array) - дополнительные параметры для сравнения
+	 */
+	function menuActive($controller, $action = null, $params = array())
+	{
+		// Проверяем контроллер
+		if ($_GET["controller"] != $controller) {
+			return;
+		}
+		
+		// Проверяем экшн
+		if (isset($action) && $_GET["action"] != $action) {
+			return;
+		}
+		
+		// Проверяем дополнительные параметры
+		foreach ($params as $param_name => $param_val) {
+			if ($param_val != $_GET[$param_name]) {
+				return;
+			}
+		}
+		
+		// Если все проверки пройдены, возвращаем активный класс
+		return "class='active'";
+		
+		/*
+		if ($_GET["controller"] == $menu) {
+			if (!empty($action)) {
+				if ($_GET["action"] == $action) {
+					
+				}
+			}
+		}*/
+		/*
+		return ($_GET["controller"] == $controller && $_GET["action"] == $action) ? "class='active'" : "";*/
+	}
+	
 	/* 
 	 * Показать новости
 	 * $id_last_seen	– если FALSE, то отображать свои же новости (иначе указать LAST_SEEN_ID - с какого ID считаются новыми новости)
@@ -206,7 +246,18 @@
 		if ($tophr) {
 			echo '<hr class="news-seperator">';
 		}
-		/* НОВЫЕ ГОЛОСА */
+		
+		// Проверяем, есть ли вообще новости (После регистрации ничего нет. Проверяем старые голоса - если их нет, то никаких новостей не было вообще)
+		$OldVotes = $User->oldVotes($id_last_seen);
+		
+		// Если совсем никаких новостей не было
+		if (!$OldVotes) {
+			echo "<h3 class='trans center-content text-white badge-success animate-show mg-top'>"
+				 ."<span class='glyphicon glyphicon-file'></span>Новостная лента пуста</h3>";
+			return;
+		}
+		
+		/* НОВЫЕ ГОЛОСА */		
 		foreach ($User->newVotes($id_last_seen) as $Vote) {
 			echo '<div class="news-row">';
 			
@@ -261,7 +312,8 @@
 		
 					
 		/* СТАРЫЕ ГОЛОСА */
-		foreach ($User->oldVotes($id_last_seen) as $Vote) {
+		// $OldVotes уже получали вверху функции
+		foreach ($OldVotes as $Vote) {
 			echo '<div class="news-row old">';
 			
 			if ($Vote->id_user) {

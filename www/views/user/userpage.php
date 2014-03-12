@@ -36,12 +36,6 @@
 			</div>	
 			
 		<?php
-				// Если нет прилагательных
-				if (!$Adjectives) {
-					?>
-					<h3 class="trans center-content text-white badge-success animate-show" ng-show="!adjectives">Ваше мнение будет первым!</h3>
-					<?php
-				}
 			} else {
 				// Если просматривается своя же страница
 				?>
@@ -50,6 +44,16 @@
 			}
 		?>
 		<!-- СПИСОК ПРИЛАГАТЕЛЬНЫХ -->	
+		<?php
+				// Если нет прилагательных
+				if (!$Adjectives) {
+					echo '<h3 class="trans center-content text-white badge-success animate-show mg-top" ng-show="!adjectives">';
+					echo ($own_page ? "<span class='glyphicon glyphicon-file'></span>Вас пока никто не оценивал" 
+									: "<span class='glyphicon glyphicon-pencil'></span>Ваше мнение будет первым!");
+					echo '</h3>';
+				}
+		?>
+		
 		<div class="row" style="margin-top: 30px" id="adjective-list-angular" ng-init="adjectives = <?=htmlspecialchars(json_encode($Adjectives, JSON_NUMERIC_CHECK))?>">
 				<div ng-repeat="adj in adjectives | orderBy:['_ang_order', 'id']:true"   class="adjective-row animate-repeat">
 						

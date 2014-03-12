@@ -32,5 +32,6 @@
 		{
 			header("Location: index.php?".http_build_query($parameters));
 		}
+		
 	}
 ?>

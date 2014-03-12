@@ -714,19 +714,86 @@ input[type=text].icon.instagram, input[type=password].icon.instagram, input[type
   color: white;
   font-size: 35px;
   opacity: 0.5;
+  top: 0;
+  line-height: 61px;
 }
-/* line 628, ../sass/screen.scss */
+/* line 630, ../sass/screen.scss */
 .arrow-back.big:hover {
   opacity: 1;
 }
 
-/* line 634, ../sass/screen.scss */
+/* line 636, ../sass/screen.scss */
 .cursor-default {
   cursor: default;
 }
 
-/* line 639, ../sass/screen.scss */
+/* line 641, ../sass/screen.scss */
 button .glyphicon {
   margin-right: 6px;
   font-size: 15px;
+}
+
+/* line 647, ../sass/screen.scss */
+h3 {
+  font-family: "RaleWayThin";
+}
+/* line 650, ../sass/screen.scss */
+h3.mg-top {
+  margin-top: 20px;
+}
+/* line 654, ../sass/screen.scss */
+h3 .glyphicon {
+  margin-right: 8px;
+  display: inline;
+}
+
+/* line 664, ../sass/screen.scss */
+.navbar .nav > li .count {
+  position: absolute;
+  background: #e60033;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 10px;
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+  height: 20px;
+  width: 20px;
+  border: 1px solid white;
+  top: 3px;
+  right: 3px;
+  color: white;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  line-height: 20px;
+  z-index: 5;
+}
+/* line 684, ../sass/screen.scss */
+.navbar .nav > li .count.d1 {
+  font-size: 12px;
+}
+/* line 689, ../sass/screen.scss */
+.navbar .nav > li .glyphicon {
+  font-size: 20px;
+  top: 0;
+}
+/* line 693, ../sass/screen.scss */
+.navbar .nav > li .glyphicon.inline {
+  font-size: 14px;
+  margin-right: 5px;
+  top: 1px;
+}
+
+/* line 704, ../sass/screen.scss */
+label {
+  color: white;
+  font-size: 22px;
+  float: left;
+}
+
+/* line 710, ../sass/screen.scss */
+.form-group {
+  margin-bottom: 10px;
 }

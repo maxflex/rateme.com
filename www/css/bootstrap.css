@@ -4634,6 +4634,10 @@ input[type="submit"].btn.btn-mini {
 
 .navbar .nav > li {
   float: left;
+  position: relative;
+  text-transform: uppercase;
+  height: 50px;
+  overflow: hidden;
 }
 
 .navbar .nav > li > a {
@@ -4642,6 +4646,7 @@ input[type="submit"].btn.btn-mini {
   color: #ffffff;
   text-decoration: none;
   text-shadow: 0 1px 0 #080808;
+  font-family: "RaleWayLight";
 }
 
 .navbar .nav .dropdown-toggle .caret {
