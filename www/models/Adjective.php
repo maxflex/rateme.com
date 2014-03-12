@@ -155,6 +155,19 @@
 			}
 		}
 		
+		public function adjRate()
+		{
+			$pos = (float) $this->countVotes(self::TYPE_POSITIVE);
+			$neg = (float) $this->countVotes(self::TYPE_NEGATIVE);
+			$sum = $pos + $neg;
+			$pos = $pos / $sum + 1;
+			$neg = $neg / $sum + 1;
+			
+			$rate = max($pos, $neg);
+			$rate *= $sum;
+			return $rate;
+		}
+		
 		/*
 		 * Устанавливает переменные для Angular
 		 */
@@ -166,6 +179,6 @@
 			$this->_ang_pos_count	= $this->countVotes(self::TYPE_POSITIVE);					// Кол-во голосов «ЗА»
 			$this->_ang_neg_count	= $this->countVotes(self::TYPE_NEGATIVE);					// Кол-во голосов «ПРОТИВ»
 			$this->_ang_pos_percent	= $this->positivePercent();									// Процент положительных голосов
-			$this->_ang_order		= 0;														// Дополнительная сортировка
+			$this->_ang_order		= $this->adjRate();											// Дополнительная сортировка
 		}
 	}
