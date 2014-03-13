@@ -36,7 +36,7 @@ angular.module('UserPage', ['ngAnimate']);
 		});
 		
 		// Для дополнительной сортировки (каждому новому поднятию в списке $scope.order++, чтоб всегда новое было вверху)
-		$scope.order = 0;
+		$scope.order = 10000;
 		
 		// По ходу печати пишет прилагательное сверху
 		$scope.updateHello = function() {
@@ -125,7 +125,7 @@ angular.module('UserPage', ['ngAnimate']);
 								"_ang_neg"			: "",
 								"_ang_neg_count"	: 0,
 								"_ang_pos_percent"	: 100,
-								"_ang_order"		: 2000000,
+								"_ang_order"		: $scope.order++,
 							});
 						
 							// Очищаем инпуты
@@ -144,7 +144,7 @@ angular.module('UserPage', ['ngAnimate']);
 				// Иначе оставляем голос за уже существующее прилагательное
 				} else {					
 					// Поднимаем прилагательное в списке
-					result[0]._ang_order = 2000000;
+					result[0]._ang_order = $scope.order++;
 					
 					// Если за прилагательное еще не голосовалось, то голосуем
 					if (!result[0]._ang_pos) {
