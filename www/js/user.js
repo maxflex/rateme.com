@@ -125,7 +125,7 @@ angular.module('UserPage', ['ngAnimate']);
 								"_ang_neg"			: "",
 								"_ang_neg_count"	: 0,
 								"_ang_pos_percent"	: 100,
-								"_ang_order"		: $scope.order,
+								"_ang_order"		: 2000000,
 							});
 						
 							// Очищаем инпуты
