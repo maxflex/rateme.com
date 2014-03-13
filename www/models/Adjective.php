@@ -181,6 +181,7 @@
 			$this->_ang_pos_count	= $this->countVotes(self::TYPE_POSITIVE);					// Кол-во голосов «ЗА»
 			$this->_ang_neg_count	= $this->countVotes(self::TYPE_NEGATIVE);					// Кол-во голосов «ПРОТИВ»
 			$this->_ang_pos_percent	= $this->positivePercent();									// Процент положительных голосов
-			$this->_ang_order		= $this->adjRate();											// Дополнительная сортировка
+			$this->_ang_order		= $this->adjRate();											// Сортировка по рейтингу
+			$this->_ang_new_order   = 0;														// Дополнительная сортировка по новизне записи
 		}
 	}

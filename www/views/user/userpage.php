@@ -55,7 +55,7 @@
 		?>
 		
 		<div class="row" style="margin-top: 30px" id="adjective-list-angular" ng-init="adjectives = <?=htmlspecialchars(json_encode($Adjectives, JSON_NUMERIC_CHECK))?>">
-				<div ng-repeat="adj in adjectives | orderBy:['_ang_order', 'id']:true"   class="adjective-row animate-repeat">
+				<div ng-repeat="adj in adjectives | orderBy:['_ang_new_order', '_ang_order', 'id']:true"   class="adjective-row animate-repeat">
 						
 					<span class="adjective-toptext">{{adj._ang_adjective}}</span>
 					
