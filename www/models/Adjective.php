@@ -160,8 +160,10 @@
 			$pos = (float) $this->countVotes(self::TYPE_POSITIVE);
 			$neg = (float) $this->countVotes(self::TYPE_NEGATIVE);
 			$sum = $pos + $neg;
-			$pos = $pos / ($sum + 1);
-			$neg = $neg / ($sum + 1);
+			if ($sum == 0)
+				return 0;
+			$pos = $pos / $sum + 1;
+			$neg = $neg / $sum + 1;
 			
 			$rate = max($pos, $neg);
 			$rate *= $sum;
