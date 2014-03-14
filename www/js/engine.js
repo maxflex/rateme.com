@@ -34,6 +34,12 @@
 		window.location = "index.php?controller=" + controller + "&action=" + action;
 	}
 	
+	// Редирект с параметрами  (принимает массив, параметр => значение)
+	function redirect(params) {
+		url = "index.php?" + $.param(params);
+		window.location = url;
+	}
+	
 	// Переход назад
 	function goBack()
 	{

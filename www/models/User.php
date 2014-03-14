@@ -14,6 +14,9 @@
 		// Переменная с прилагательными
 		public $Adjectives = NULL;
 		
+		// По умолчанию нет ID (нужно для функции checkLogin)
+		public $id = NULL;
+		
 		
 		/*====================================== СИСТЕМНЫЕ ФУНКЦИИ ======================================*/
 
@@ -34,14 +37,14 @@
 			}
 		}
 		
-		
 		/*====================================== СТАТИЧЕСКИЕ ФУНКЦИИ ======================================*/
 		
 		/* 
 		 * Находим пользователя по логину
 		 * $login – логин для поиска
+		 * $default_id - подставлять ли пользователя по умолчанию, если не нашелся по логину
 		 */
-		public static function findByLogin($login)
+		public static function findByLogin($login, $default_id = 1)
 		{
 			// Обрезаем пробелы
 			$login = trim($login);
@@ -51,14 +54,15 @@
 				"condition"	=> "login='{$login}'",
 			));
 			
-			// Если пользователь не нашелся
-			if (!$User) {
-				// То подставляем самого первого (создателя сайта)
-				$User = self::findById(1);
+			// Если пользователь не нашелся (и нужно подставлять по умолчанию
+			if (!$User && $default_id) {
+				// То пользователя по умолчанию (самого первого)
+				$User = self::findById($default_id);
 			}
 			
 			return $User;
 		}
+
 		
 		/*
 		 * Установить соединение с БД пользователя
@@ -112,7 +116,29 @@
 		}
 				
 		/*====================================== ФУНКЦИИ КЛАССА ======================================*/
-
+		
+		/*
+		 * Если логин уже существует, то логин приводится к форме user3213123
+		 * (например, если пользователь ID: 1, LOGIN: MAXFLEX существует и регистрируется новый пользователь ID: n
+		 * с таким же логином, то логин нового пользователя приводится к форме user{n}
+		 * ПРОВЕРЯТЬ МОЖНО ТОЛЬКО ПОСЛЕ СОХРАНЕНИЯ (когда есть $this->id)
+		 */
+		public function loginCheck()
+		{			
+			// Пытаемся найти пользователя с установленным в $this логином
+			$User = User::find(array(
+				"condition" => "login='{$this->login}' AND id!={$this->id}",
+			));
+			
+			// Если пользователь с таким логином нашелся
+			if ($User) {
+				// Меняем логин на форму user{id}
+				$this->login = "user".$this->id;
+				return true;
+			} else {
+				return false;
+			}
+		}
 		
 		/*
 		 * Добавить прилагательное
@@ -415,6 +441,84 @@
 			 
 			 return ($Subscribers ? $Subscribers : array()); // Чтобы не было WARNING: Invalid argument supplied for foreach
 		 }
+		 
+		 
+		 /*
+		 * Создаем таблицу пользователя
+		 * @return true в случае успешного создания БД пользователя и таблиц, FALSE в случае ошибки
+		 */
+		public function createTable()
+		{
+			// Открываем соединение с БД пользователя	
+			$new_db = new mysqli(DB_HOST, DB_LOGIN, DB_PASSWORD);
+			
+			// Установлено ли соединение
+			if (mysqli_connect_errno($new_db))
+			{
+				die("Failed to create a new DB: " . mysqli_connect_error());
+			}
+			
+			// Устанавливаем кодировку
+			$new_db->set_charset("utf8");	
+			
+			// Запрос на создание новой БД
+			$result = $new_db->query("CREATE DATABASE ".DB_PREFIX."user_{$this->id}");
+			
+			
+			// echo "RESULT=".$result;
+			
+			// Если запрос выполнен успешно
+			if ($result) {
+			//	echo "DB ".DB_PREFIX."user_{$this->id} created!";
+				// Подключаемся к только что созданной БД
+				$new_db->select_db(DB_PREFIX."user_{$this->id}");
+				
+				// Создаем таблицы по умолчанию
+				$result = $new_db->multi_query("CREATE TABLE `adjectives` (
+					  `id` int(11) NOT NULL AUTO_INCREMENT,
+					  `adjective` varchar(20) NOT NULL COMMENT 'Прилагательное',
+					  `id_first_vote` int(10) unsigned DEFAULT NULL COMMENT 'ID первого голоса за прилагательное (Он добавил, остальные голосуют)',
+					  `hidden` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Видимость прилагательного',
+					  PRIMARY KEY (`id`)
+					) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Отзывы о пользователе (прилагательные)' AUTO_INCREMENT=1 ;
+					
+
+					CREATE TABLE `subscribers` (
+					  `id` int(11) NOT NULL AUTO_INCREMENT,
+					  `id_user` int(10) unsigned DEFAULT NULL COMMENT 'ID подписчика',
+					  PRIMARY KEY (`id`)
+					) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Подписчики' AUTO_INCREMENT=1 ;
+					
+					CREATE TABLE `subscriptions` (
+					  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+					  `id_user` int(10) unsigned DEFAULT NULL COMMENT 'ID пользователя, на которого подписан',
+					  `id_last_seen` int(10) unsigned NOT NULL COMMENT 'ID последнего просмотренного голоса (для новостей)',
+					  PRIMARY KEY (`id`)
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+					
+					CREATE TABLE `votes` (
+					  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+					  `id_adjective` int(10) unsigned NOT NULL COMMENT 'ID прилагательного',
+					  `id_user` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ID пользователя, который проголосовал. 0 - аноним',
+					  `type` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1 - положительный голос, 0 - отрицательный',
+					  `ip` varchar(15) DEFAULT NULL COMMENT ' IP проголосовавшего',
+					  PRIMARY KEY (`id`)
+					) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='IP проголосовавших' AUTO_INCREMENT=1 ;"
+				);
+				
+				// echo "ERROR=".$new_db->error."\n";
+				
+				// Устанавливаем соединение с текущей новой БД
+				global $db_user;
+				$db_user = $new_db;
+				
+				// Возвращаем TRUE/FALSE функции
+				return $result;
+			} else {
+			//	echo "COULD'T CREATE DB";
+				return false;
+			} 
+		}	
 		 
 		 
 

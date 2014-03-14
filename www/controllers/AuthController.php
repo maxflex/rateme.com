@@ -1,1 +1,0 @@
-<?php	// Контроллер	class AuthController extends Controller	{		public $defaultAction = "Auth";				// Папка вьюх		protected $_viewsFolder	= "auth";						public function actionAuth()		{			$test = 5;			$this->render("auth", array(				"test" => $test			));		}			}

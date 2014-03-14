@@ -43,7 +43,7 @@
 		global $db_user; 
 
 		// Открываем соединение с основной БД		
-		$db_user = new mysqli(DB_HOST, DB_LOGIN, DB_PASSWORD, "user_{$id_user}");
+		$db_user = new mysqli(DB_HOST, DB_LOGIN, DB_PASSWORD, DB_PREFIX."user_{$id_user}");
 		
 		// Установлено ли соединение
 		if (mysqli_connect_errno($db_user))
@@ -67,13 +67,20 @@
 	/*
 	 * Добавляет JavaScript
 	 * Добавление скриптов через запятую ( addJs('script_1, script_2') )
+	 * $side – подключается сторонний JS (не размещенний на сайте в папке /js) (тогда скрипт передается строкой)
 	 */
-	function addJs($js)
+	function addJs($js, $side = false)
 	{
-		$js = explode(", ", $js);
-		
-		foreach ($js as $script_name) {
-			echo "<script src='js/{$script_name}.js'></script>";
+		// если подключается сторонний JS
+		if ($side) {
+			echo "<script src='$js' type='text/javascript'></script>";
+		} else {
+		// подключаем внутренний JS
+			$js = explode(", ", $js);
+			
+			foreach ($js as $script_name) {
+				echo "<script src='js/{$script_name}.js' type='text/javascript'></script>";
+			}
 		}
 	}
 	

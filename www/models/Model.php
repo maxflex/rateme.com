@@ -176,7 +176,10 @@
 		 public function save()
 		 {
 		 	// Перед сохранением
-		 	$this->beforeSave();
+		 	if (method_exists($this, "beforeSave")) {
+			 	$this->beforeSave();
+		 	}
+		 	
 		 	
 		 	// Проверяем есть ли в бд шидзе с таким ID
 			if ($this->isNewRecord)
@@ -206,7 +209,12 @@
 				if ($result) {
 					$this->id = static::dbConnection()->insert_id; 	// Получаем ID
 					$this->isNewRecord = false;						// Уже не новая запись
-					$this->afterSave();								// После сохранения
+					
+					// После сохранения 
+					if (method_exists($this, "afterSave")) {
+						$this->afterSave();								// После сохранения
+					}
+					
 					return true;
 				} else {
 					return false;

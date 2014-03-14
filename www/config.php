@@ -7,12 +7,13 @@
 		"DB_LOGIN"		=> "root",
 		"DB_PASSWORD"	=> "root",
 		"DB_HOST"		=> "localhost",
+		"DB_PREFIX"		=> "",
 		"BASE_ROOT"		=> $_SERVER["DOCUMENT_ROOT"]."/rateme.com/www/",
 	);
 
 	// Контроллеры и модели 
 	$_controllers	= array(
-		"", "User", "Index", "Profile", "Test", "Auth"
+		"", "User", "Index", "Profile", "Test", 
 	);
 	
 	$_models		= array(
@@ -32,7 +33,7 @@
 	error_reporting(E_ERROR | E_WARNING | E_PARSE);
 		
 	// Открываем соединение с основной БД
-	$db_settings = new mysqli(DB_HOST, DB_LOGIN, DB_PASSWORD, "settings");
+	$db_settings = new mysqli(DB_HOST, DB_LOGIN, DB_PASSWORD, DB_PREFIX."settings");
 	
 	// Установлено ли соединение
 	if (mysqli_connect_errno($db_settings))
